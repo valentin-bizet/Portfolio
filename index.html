@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Ton Prénom] - Trackside Engineer</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="noise-overlay"></div>
+    <div class="ambient-glow"></div>
+
+    <nav class="navbar">
+        <div class="logo">Valentin BIZET</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Projects</a></li>
+            <li><a href="about.html">Profile</a></li>
+            <li><a href="mailto:tonemail@gmail.com">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero-container">
+        <div class="hero-bg" style="background-image: url('images/hero-bg.png');"></div>
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content js-scroll-fade">
+            <span class="badge">SYSTEM ONLINE</span>
+            <h1>Valentin BIZET</h1>
+            <p class="subtitle">Where code meets the circuit. <br> Passionate about pushing IT limits to the finish line.</p>
+        </div>
+
+        <div class="scroll-icon">↓</div>
+    </header>
+
+    <section class="projects-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>SELECTED WORKS</h2>
+            </div>
+
+            <div class="bento-grid">
+                
+                <a href="#" class="card card-large">
+                    <div class="card-image" style="background: linear-gradient(45deg, #1a1a2e, #16213e);">
+                        <div class="tech-tag">PYTHON / DOCKER</div>
+                    </div>
+                    <div class="card-info">
+                        <h3>F1 Telemetry Pipeline</h3>
+                        <p>Architecture temps-réel UDP vers InfluxDB.</p>
+                    </div>
+                </a>
+
+                <a href="#" class="card card-square">
+                    <div class="card-image" style="background: #0f0f13;">
+                        <div class="tech-tag">ANSIBLE</div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Trackside Infra</h3>
+                        <p>Déploiement IaC.</p>
+                    </div>
+                </a>
+
+                <a href="#" class="card card-square">
+                    <div class="card-image" style="background: #0f0f13;">
+                        <div class="tech-tag">CERTIF</div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Cisco CCNA</h3>
+                        <p>Validé 2024.</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Effet Parallax simple pour le texte
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const heroContent = document.querySelector('.js-scroll-fade');
+            const heroBg = document.querySelector('.hero-bg');
+
+            // Le texte monte et disparait
+            heroContent.style.opacity = 1 - (scrolled / 500);
+            heroContent.style.transform = `translateY(${scrolled * 0.4}px)`;
+            
+            // L'image de fond bouge un peu moins vite (effet profondeur)
+            heroBg.style.transform = `translateY(${scrolled * 0.2}px) scale(${1 + scrolled/2000})`;
+        });
+    </script>
+</body>
+</html>
