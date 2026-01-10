@@ -560,6 +560,8 @@ body {
 
 /* --- Le Logo à Droite --- */
 .node-logo {
+    cursor: pointer; /* Important pour montrer que c'est cliquable */
+    /* ... le reste de ton css node-logo ... */
     flex-shrink: 0; /* Empêche le logo de s'écraser si l'écran est petit */
     width: 80px;  /* Taille fixe du conteneur */
     height: 80px;
@@ -770,4 +772,102 @@ body {
     .comm-header h1 { font-size: 2rem; }
     .action-btn { padding: 15px; }
     .icon-box { width: 40px; height: 40px; font-size: 1rem; }
+}
+
+/* =========================================
+   SECTION CERTIFICATIONS & MOOCS
+   ========================================= */
+
+.certifs-section {
+    margin-top: 60px;    /* Espace au-dessus (après les stats) */
+    margin-bottom: 60px; /* Espace en-dessous (avant la timeline) */
+}
+
+.certif-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espace entre chaque ligne */
+}
+
+.certif-card {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.05);
+    padding: 20px 25px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+}
+
+.certif-card:hover {
+    transform: translateX(5px); /* Petit mouvement au survol */
+    border-color: var(--accent); /* Bordure bleue */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* La date en gras à gauche */
+.certif-date {
+    font-family: var(--font-head);
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 1.1rem;
+    margin-right: 30px;
+    min-width: 60px; /* Pour que tout soit bien aligné */
+}
+
+/* Les infos au milieu */
+.certif-details {
+    flex-grow: 1; /* Prend toute la place disponible */
+}
+
+.certif-details h3 {
+    font-size: 1rem;
+    margin-bottom: 4px;
+    color: var(--text-main);
+}
+
+.certif-details .issuer {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #999;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Le bouton à droite */
+.certif-btn {
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-main);
+    border: 1px solid #e0e0e0;
+    padding: 8px 15px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    background: #fafafa;
+}
+
+.certif-btn i {
+    margin-left: 5px;
+    font-size: 0.7rem;
+}
+
+.certif-btn:hover {
+    background: var(--text-main);
+    color: #ffffff; /* Texte devient blanc */
+    border-color: var(--text-main);
+}
+
+/* RESPONSIVE MOBILE */
+@media (max-width: 600px) {
+    .certif-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .certif-btn {
+        width: 100%; /* Bouton pleine largeur sur mobile */
+        text-align: center;
+    }
 }
