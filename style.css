@@ -1,13 +1,18 @@
-/* === VARIABLES MUGEN STYLE === */
+/* === VARIABLES STYLE "LABORATOIRE" (CLATR) === */
 :root {
-    --bg-color: #030303; /* Noir quasi absolu */
-    --card-bg: rgba(255, 255, 255, 0.03); /* Verre très sombre */
-    --border-color: rgba(255, 255, 255, 0.1); /* Bordure subtile */
-    --text-main: #ffffff;
-    --text-muted: #888888;
-    --accent: #9dff00; /* Le vert "Lime" cyber (ou change pour #00f2ff cyan) */
+    --bg-color: #f4f5f7; /* Gris très clair / Blanc cassé "Premium" */
+    --card-bg: #ffffff; /* Cartes blanches pures */
+    --border-color: rgba(0, 0, 0, 0.08); /* Bordures grises subtiles */
+    
+    --text-main: #111111; /* Noir presque pur pour le contraste */
+    --text-muted: #666666; /* Gris moyen pour les sous-titres */
+    
+    --accent: #0051ff; /* Bleu "Ingénierie" (plus sérieux que le néon) */
+    
     --font-head: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
+    
+    --shadow-soft: 0 10px 30px -10px rgba(0,0,0,0.08); /* L'ombre douce Apple */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -19,23 +24,20 @@ body {
     overflow-x: hidden;
 }
 
-/* === EFFET GRAIN & LUMIÈRE (BACKGROUND) === */
+/* === EFFET PAPIER TEXTURÉ (OPTIONNEL) === */
 .noise-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: url('https://grainy-gradients.vercel.app/noise.svg'); /* Texture bruit légère */
-    opacity: 0.05;
+    background: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.03; /* Très subtil sur fond blanc */
     z-index: 9999;
     pointer-events: none;
+    filter: invert(1); /* On inverse le bruit pour qu'il soit gris sur blanc */
 }
 
 .ambient-glow {
-    position: fixed;
-    top: -20%; right: -10%;
-    width: 800px; height: 800px;
-    background: radial-gradient(circle, rgba(157, 255, 0, 0.08) 0%, rgba(0,0,0,0) 70%);
-    z-index: -1;
-    pointer-events: none;
+    /* On retire la lueur verte/néon qui fait bizarre sur fond blanc */
+    display: none; 
 }
 
 /* === NAVIGATION === */
@@ -43,12 +45,14 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem 5%;
+    padding: 1.5rem 5%;
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 100;
-    mix-blend-mode: difference; /* Astuce pour que le texte soit toujours lisible */
+    background: rgba(244, 245, 247, 0.85); /* Fond semi-transparent clair */
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .logo {
@@ -56,6 +60,7 @@ body {
     font-weight: 700;
     font-size: 1.2rem;
     letter-spacing: -0.5px;
+    color: var(--text-main);
 }
 
 .nav-links {
@@ -66,14 +71,17 @@ body {
 
 .nav-links a {
     text-decoration: none;
-    color: white;
+    color: var(--text-main);
     font-size: 0.9rem;
-    font-weight: 500;
-    opacity: 0.7;
-    transition: opacity 0.3s;
+    font-weight: 600;
+    opacity: 0.6;
+    transition: all 0.3s;
 }
 
-.nav-links a:hover { opacity: 1; }
+.nav-links a:hover, .nav-links a.active { 
+    opacity: 1; 
+    color: var(--accent);
+}
 
 /* === HERO SECTION === */
 .hero-container {
@@ -81,7 +89,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; /* Centre tout */
+    align-items: center;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -93,13 +101,15 @@ body {
     background-size: cover;
     background-position: center;
     z-index: -2;
-    filter: grayscale(100%) contrast(1.2) brightness(0.6); /* Rend l'image F1 sombre et classe */
+    /* ASTUCE : On garde l'image mais on la rend très claire pour qu'on puisse écrire en noir dessus */
+    opacity: 0.15; 
+    filter: grayscale(100%) contrast(1.1);
 }
 
-/* Dégradé noir en bas de l'image pour fondre avec la suite */
 .hero-overlay {
+    /* Dégradé blanc en bas pour fondre l'image */
     position: absolute;
-    bottom: 0; left: 0; width: 100%; height: 50%;
+    bottom: 0; left: 0; width: 100%; height: 40%;
     background: linear-gradient(to top, var(--bg-color), transparent);
     z-index: -1;
 }
@@ -107,15 +117,16 @@ body {
 .hero-content { z-index: 2; margin-top: 50px; }
 
 .badge {
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    padding: 5px 12px;
+    border: 1px solid #000000; /* Bordure noire */
+    color: #ffffff; /* Texte BLANC */
+    background: #000000; /* Fond NOIR */
+    padding: 6px 14px;
     border-radius: 50px;
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
-    background: rgba(157, 255, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Petite ombre portée */
 }
 
 .hero-content h1 {
@@ -123,20 +134,33 @@ body {
     font-size: 5rem;
     line-height: 0.95;
     margin: 1.5rem 0;
-    letter-spacing: -2px;
+    letter-spacing: -3px;
+    color: #000000; /* Assure-toi que c'est du noir pur */
+    
+    /* LA MAGIE EST ICI : */
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.9), 
+                 0 0 10px rgba(255, 255, 255, 0.8);
 }
 
 .subtitle {
-    color: var(--text-muted);
+    color: #222222; /* Un gris un peu plus foncé pour la lisibilité */
     font-size: 1.1rem;
     max-width: 500px;
     margin: 0 auto;
+    font-weight: 500; /* Un peu plus gras */
+    
+    /* Le petit halo pour détacher du fond */
+    text-shadow: 0 0 20px rgba(255, 255, 255, 1);
+    background: rgba(255, 255, 255, 0.3); /* Optionnel : léger fond blanc semi-transparent */
+    padding: 10px; /* Si tu mets le fond, ajoute un peu d'espace */
+    border-radius: 10px; /* Arrondir les angles */
 }
 
 .scroll-icon {
     position: absolute;
     bottom: 40px;
-    opacity: 0.5;
+    color: var(--text-main);
+    font-size: 1.5rem;
     animation: bounce 2s infinite;
 }
 
@@ -147,40 +171,42 @@ body {
     padding: 100px 5%;
     position: relative;
     z-index: 10;
-    background: var(--bg-color); /* Couleur unie pour cacher l'image quand on scroll */
+    background: var(--bg-color);
 }
 
 .section-header { margin-bottom: 40px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; }
-.section-header h2 { font-family: var(--font-head); font-size: 1.5rem; font-weight: 500; }
+.section-header h2 { font-family: var(--font-head); font-size: 1.5rem; font-weight: 600; color: var(--text-main); }
 
 .bento-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 Colonnes */
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px; /* Un peu plus d'espace en mode clair */
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* === STYLE DES CARTES (LE LOOK MUGEN) === */
+/* === STYLE DES CARTES (VERSION CLAIRE) === */
 .card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 20px;
     overflow: hidden;
     text-decoration: none;
-    color: white;
+    color: var(--text-main);
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     display: flex;
     flex-direction: column;
+    /* L'ombre est clé pour le mode clair */
+    box-shadow: var(--shadow-soft);
 }
 
 .card:hover {
-    transform: scale(0.98); /* Petit effet de recul au clic */
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+    transform: translateY(-5px); /* Monte légèrement */
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15); /* Ombre plus forte */
+    border-color: rgba(0,0,0,0.15);
 }
 
-.card-large { grid-column: span 2; } /* Prend toute la largeur */
+.card-large { grid-column: span 2; }
 .card-square { grid-column: span 1; }
 
 .card-image {
@@ -191,25 +217,41 @@ body {
     display: flex;
     align-items: flex-start;
     justify-content: flex-end;
+    /* Fond gris clair par défaut pour les images */
+    background: #eef0f5; 
+    border-bottom: 1px solid var(--border-color);
 }
 
 .tech-tag {
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(5px);
+    background: #ffffff;
+    color: var(--text-main);
     padding: 6px 12px;
     border-radius: 8px;
     font-size: 0.7rem;
-    font-weight: 600;
-    border: 1px solid rgba(255,255,255,0.1);
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
-.card-info { padding: 25px; }
-.card-info h3 { font-family: var(--font-head); font-size: 1.4rem; margin-bottom: 5px; }
-.card-info p { color: var(--text-muted); font-size: 0.9rem; }
+.card-info { padding: 30px; }
+.card-info h3 { font-family: var(--font-head); font-size: 1.4rem; margin-bottom: 8px; font-weight: 700; }
+.card-info p { color: var(--text-muted); font-size: 0.95rem; }
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .hero-content h1 { font-size: 3rem; }
     .bento-grid { grid-template-columns: 1fr; }
     .card-large { grid-column: span 1; }
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+    
+    /* L'ASTUCE "BLUEPRINT" */
+    filter: invert(1) grayscale(100%); /* Inverse les couleurs (Noir->Blanc) */
+    opacity: 0.5; /* Ajuste selon ton goût */
+    mix-blend-mode: darken;
 }
