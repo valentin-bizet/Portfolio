@@ -3,20 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[Ton Prénom] - Trackside Engineer</title>
+    <title>Valentin BIZET - Trackside Engineer</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- DESIGN SYSTEM : PURE WHITE --- */
+        :root {
+            --accent-color: #1a1f2c;
+            --text-main: #1a1f2c;
+            --text-muted: #505c6e;
+            --bg-white: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg-white);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- STRUCTURE GLOBALE --- */
+        .content-wrapper {
+            background-color: #ffffff !important;
+            position: relative;
+            z-index: 10;
+            padding-top: 100px;
+            padding-bottom: 100px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- BLOC NAVIGATION GÉNÉRIQUE --- */
+        .nav-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 150px;
+            gap: 60px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .nav-card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-card.reverse {
+            flex-direction: row-reverse;
+        }
+
+        /* --- TEXTES --- */
+        .card-content {
+            flex: 1;
+        }
+
+        .card-tag {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: block;
+            border-left: 3px solid var(--accent-color);
+            padding-left: 10px;
+        }
+
+        .card-content h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            margin: 0 0 25px 0;
+            text-transform: uppercase;
+            color: var(--text-main);
+            line-height: 1.1;
+        }
+
+        .card-content p {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--text-muted);
+            margin-bottom: 35px;
+            font-size: 1.1rem;
+        }
+
+        /* --- STYLE SPÉCIFIQUE : PROFILE (ROND) --- */
+        .profile-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- CORRECTION PHOTO DE PROFIL --- */
+        .profile-circle {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            
+            /* GESTION DE L'IMAGE */
+            object-fit: cover; /* Remplit le cercle */
+            
+            /* LE RÉGLAGE MAGIQUE : */
+            /* Center = Centré horizontalement */
+            /* 20% = On part du haut (pour ne pas couper les cheveux) */
+            object-position: center 20%; 
+            
+            /* Style esthétique */
+            border: 8px solid #f8f9fa;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            transition: transform 0.4s ease; /* Transition fluide */
+            cursor: pointer;
+            
+            /* ASTUCE : Si ta tête est encore trop grosse (zoomée), 
+               dé-commente la ligne ci-dessous (enleve les / * * /) pour dézoomer un peu : */
+            /* padding: 15px; background: white; */
+        }
+
+        /* ZOOM UNIQUEMENT AU SURVOL DE LA PHOTO */
+        .profile-circle:hover {
+            transform: scale(1.05); /* Léger zoom */
+            border-color: #e2e6ea; /* La bordure fonce très légèrement */
+        }
+
+        /* --- STYLE SPÉCIFIQUE : PROJECTS (RECTANGLE FONDU) --- */
+        .project-visual {
+            flex: 1.2;
+            height: 450px;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* --- NOUVEAU : GESTION DE L'IMAGE PROJETS (TAG IMG) --- */
+.project-img-fit {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Remplit tout le cadre sans déformer */
+    object-position: center;
+    transition: transform 1.2s ease;
+}
+
+/* Le zoom au survol fonctionne toujours */
+.nav-card:hover .project-img-fit {
+    transform: scale(1.05);
+}
+
+        /* Zoom sur les projets uniquement au survol du projet */
+        .nav-card:hover .project-img-bg {
+            transform: scale(1.05);
+        }
+
+        /* --- BOUTONS --- */
+        .btn-tech {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .btn-tech:hover {
+            background: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        /* --- CONTACT --- */
+        .contact-section {
+            text-align: center;
+            padding: 80px 20px;
+            background: #fafafa;
+        }
+        
+        .contact-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            color: var(--text-main);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-card, .nav-card.reverse {
+                flex-direction: column-reverse;
+                text-align: center;
+                gap: 30px;
+            }
+            .card-tag {
+                border-left: none;
+                border-bottom: 3px solid var(--accent-color);
+                display: inline-block;
+                padding: 0 0 5px 0;
+            }
+            .profile-circle {
+                width: 250px;
+                height: 250px;
+            }
+            .project-visual {
+                width: 100%;
+                height: 300px;
+                -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+                mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            }
+        }
+    </style>
 </head>
 <body>
-
-    <div class="noise-overlay"></div>
-    <div class="ambient-glow"></div>
 
     <nav class="navbar">
         <div class="logo">Valentin BIZET</div>
         <ul class="nav-links">
-            <li><a href="index.html" class="active">Projects</a></li>
+            <li><a href="index.html" class="active">Home</a></li>
             <li><a href="about.html">Profile</a></li>
+            <li><a href="projects.html">Projects</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
@@ -24,71 +237,80 @@
     <header class="hero-container">
         <div class="hero-bg" style="background-image: url('images/hero-bg.png');"></div>
         <div class="hero-overlay"></div>
-        
         <div class="hero-content js-scroll-fade">
             <span class="badge">SYSTEM ONLINE</span>
             <h1>Valentin BIZET</h1>
             <p class="subtitle">Where code meets the circuit. <br> Passionate about pushing IT limits to the finish line.</p>
         </div>
-
         <div class="scroll-icon">↓</div>
     </header>
 
-    <section class="projects-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>SELECTED WORKS</h2>
-            </div>
-
-            <div class="bento-grid">
+    <div class="content-wrapper">
+        <section class="container">
+            
+            <div class="nav-card">
+                <div class="card-content">
+                    <span class="card-tag">01 // DRIVER</span>
+                    <h2>Profile</h2>
+                    <p>From the starting grid to the finish line: my journey in high-performance IT. Decoding the engineer behind the machine.</p>
+                    <a href="about.html" class="btn-tech">About me</a>
+                </div>
                 
-                <a href="#" class="card card-large">
-                    <div class="card-image" style="background: linear-gradient(45deg, #1a1a2e, #16213e);">
-                        <div class="tech-tag">PYTHON / DOCKER</div>
-                    </div>
-                    <div class="card-info">
-                        <h3>F1 Telemetry Pipeline</h3>
-                        <p>Architecture temps-réel UDP vers InfluxDB.</p>
-                    </div>
-                </a>
-
-                <a href="#" class="card card-square">
-                    <div class="card-image" style="background: #0f0f13;">
-                        <div class="tech-tag">ANSIBLE</div>
-                    </div>
-                    <div class="card-info">
-                        <h3>Trackside Infra</h3>
-                        <p>Déploiement IaC.</p>
-                    </div>
-                </a>
-
-                <a href="#" class="card card-square">
-                    <div class="card-image" style="background: #0f0f13;">
-                        <div class="tech-tag">CERTIF</div>
-                    </div>
-                    <div class="card-info">
-                        <h3>Cisco CCNA</h3>
-                        <p>Validé 2024.</p>
-                    </div>
-                </a>
-
+                <div class="profile-visual">
+                    <img src="images/profile.png" alt="Valentin Bizet" class="profile-circle">
+                </div>
             </div>
-        </div>
-    </section>
+
+            <div class="nav-card reverse">
+    <div class="card-content">
+        <span class="card-tag">02 // TELEMETRY</span>
+        <h2>Projects</h2>
+        <p>Lap records in logic. High-speed solutions for trackside challenges and deployed systems.</p>
+        <a href="projects.html" class="btn-tech">View Schematics</a>
+    </div>
+    
+    <div class="project-visual">
+        <img src="images/projects.png" alt="Projects" class="project-img-fit">
+    </div>
+</div>
+
+        </section>
+
+        <section class="contact-section">
+            <h2 class="contact-title">Ready to initiate connection?</h2>
+            <p style="color: #666; margin-bottom: 30px;">Radio check. Let's get on the same frequency.</p>
+            <a href="contact.html" class="btn-tech">Open Channel</a>
+        </section>
+
+    </div>
 
     <script>
-        // Effet Parallax simple pour le texte
+        // --- PARALLAX SIMPLE ---
         window.addEventListener('scroll', () => {
             const scrolled = window.scrollY;
             const heroContent = document.querySelector('.js-scroll-fade');
             const heroBg = document.querySelector('.hero-bg');
 
-            // Le texte monte et disparait
-            heroContent.style.opacity = 1 - (scrolled / 500);
-            heroContent.style.transform = `translateY(${scrolled * 0.4}px)`;
-            
-            // L'image de fond bouge un peu moins vite (effet profondeur)
-            heroBg.style.transform = `translateY(${scrolled * 0.2}px) scale(${1 + scrolled/2000})`;
+            if(heroContent) {
+                heroContent.style.opacity = 1 - (scrolled / 500);
+                heroContent.style.transform = `translateY(${scrolled * 0.4}px)`;
+            }
+            if(heroBg) {
+                heroBg.style.transform = `translateY(${scrolled * 0.2}px) scale(${1 + scrolled/2000})`;
+            }
+        });
+
+        // --- APPARITION FLUIDE AU SCROLL ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.nav-card').forEach(card => {
+            observer.observe(card);
         });
     </script>
 </body>
