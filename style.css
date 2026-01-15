@@ -261,6 +261,98 @@ body {
    PAGE PROFIL (About.html) - STYLE LABO
    ========================================= */
 
+   /* --- SECTION PROFIL ÉTIRÉE --- */
+
+/* 1. Un conteneur très large spécifique pour cette partie */
+.container-wide {
+    max-width: 1600px;  /* Beaucoup plus large que les 1200px habituels */
+    width: 95%;         /* Occupe 95% de l'écran sur les grands moniteurs */
+    margin: 0 auto;     /* Centré */
+    padding: 0 20px;
+}
+
+/* 2. La mise en page globale (Gauche: Texte / Droite: Les 4 carrés) */
+.profile-layout {
+    display: flex;
+    gap: 60px; /* Grand espace entre la colonne "About" et les "Stats" */
+    align-items: flex-start; /* Aligne tout en haut */
+    margin-top: 50px;
+}
+
+/* 3. Colonne de Gauche (Le texte "About", "Passion"...) */
+.profile-text-column {
+    flex: 1; /* Prend 1 portion de l'espace */
+    min-width: 350px; /* Ne devient jamais trop petit */
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* 4. Colonne de Droite (La grille avec BASE, STATUS...) */
+.profile-stats-grid {
+    flex: 2; /* Prend 2 portions de l'espace (donc 2x plus large que le texte) */
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 colonnes strictes */
+    gap: 30px; /* Espace aéré entre les cartes */
+}
+
+/* 5. Les cartes individuelles (Base, Status, Focus, Languages) */
+.stat-card {
+    background: #fff;
+    padding: 40px 30px; /* Padding généreux pour étirer visuellement */
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px; /* Force une hauteur minimale harmonieuse */
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+/* TYPOGRAPHIE INTERNE DES CARTES */
+.stat-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #999;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.stat-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1f2c;
+}
+
+.stat-highlight {
+    color: #2563eb; /* Le bleu Tech défini avant */
+}
+
+/* RESPONSIVE : Sur tablette et mobile, on empile tout */
+@media (max-width: 1024px) {
+    .profile-layout {
+        flex-direction: column;
+    }
+    .profile-text-column, .profile-stats-grid {
+        width: 100%; /* Prend toute la largeur */
+        flex: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-stats-grid {
+        grid-template-columns: 1fr; /* 1 seule colonne sur mobile */
+    }
+}
+
 .profile-container {
     padding: 120px 5% 50px 5%; /* Marge pour la navbar fixe */
     max-width: 1000px;

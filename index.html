@@ -1,317 +1,345 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valentin BIZET - Trackside Engineer</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- DESIGN SYSTEM : PURE WHITE --- */
+        /* --- 1. DESIGN SYSTEM --- */
         :root {
-            --accent-color: #1a1f2c;
-            --text-main: #1a1f2c;
-            --text-muted: #505c6e;
-            --bg-white: #ffffff;
+            --bg-dark: #0f172a;       /* Fond principal */
+            --card-dark: #1e293b;     /* Fond des cartes */
+            --text-white: #f8fafc;
+            --text-grey: #94a3b8;
+            --accent-blue: #38bdf8;   /* Cyan électrique */
+            --accent-glow: rgba(56, 189, 248, 0.5);
         }
 
+        * { box-sizing: border-box; }
+
         body {
-            background-color: var(--bg-white);
+            background-color: var(--bg-dark);
             margin: 0;
-            padding: 0;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-white);
             overflow-x: hidden;
         }
 
-        /* --- STRUCTURE GLOBALE --- */
-        .content-wrapper {
-            background-color: #ffffff !important;
-            position: relative;
-            z-index: 10;
-            padding-top: 100px;
-            padding-bottom: 100px;
+        /* --- 2. TOP NAVIGATION BAR --- */
+        .top-nav {
+            position: absolute; /* Superposé à l'image */
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 50px;
+            z-index: 100;
         }
 
-        .container {
+        .nav-brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 40px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* --- 3. HERO SECTION (F1 Background) --- */
+        .hero-container {
+            height: 85vh; /* Hauteur écran */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 20px;
+            
+            /* IMAGE DE FOND */
+            background-image: url('images/hero-bg.png'); 
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* FILTRE SOMBRE */
+        .hero-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 1));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .badge {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-blue);
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            display: inline-block;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            margin: 0;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
+        }
+
+        .subtitle {
+            color: #cbd5e1;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-top: 25px;
+            font-weight: 300;
+        }
+
+        /* --- 4. DASHBOARD SECTION (Cartes sans Images) --- */
+        .nav-section {
+            padding: 50px 20px 100px 20px; /* Un peu d'espace en bas */
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            position: relative;
+            z-index: 5;
+            margin-top: -100px; /* Remonte légèrement sur le Hero pour l'effet layer */
         }
 
-        /* --- BLOC NAVIGATION GÉNÉRIQUE --- */
-        .nav-card {
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        /* STYLE DES CARTES TECH */
+        .tech-card {
+            background: rgba(30, 41, 59, 0.95); /* Semi-transparent */
+            backdrop-filter: blur(10px);        /* Effet de flou arrière-plan */
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 50px 40px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden; /* Important pour contenir le gros chiffre */
+            transition: all 0.4s ease;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 150px;
-            gap: 60px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 300px; /* Hauteur garantie sans image */
         }
 
-        .nav-card.is-visible {
-            opacity: 1;
-            transform: translateY(0);
+        /* Effet Hover : Bordure bleue et léger soulèvement */
+        .tech-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4), 0 0 20px rgba(56, 189, 248, 0.1);
         }
 
-        .nav-card.reverse {
-            flex-direction: row-reverse;
+        /* Le gros numéro en fond (01 / 02) */
+        .bg-number {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 10rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.03); /* Très subtil */
+            transition: color 0.4s;
+            z-index: 0;
         }
 
-        /* --- TEXTES --- */
+        .tech-card:hover .bg-number {
+            color: rgba(56, 189, 248, 0.1); /* S'illumine un peu au survol */
+        }
+
+        /* Contenu de la carte */
         .card-content {
-            flex: 1;
+            position: relative;
+            z-index: 1; /* Au dessus du numéro */
         }
 
         .card-tag {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            letter-spacing: 3px;
+            font-family: 'Space Grotesk';
+            color: var(--accent-blue);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            font-weight: 700;
-            margin-bottom: 15px;
             display: block;
-            border-left: 3px solid var(--accent-color);
-            padding-left: 10px;
+            margin-bottom: 15px;
         }
 
-        .card-content h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 3rem;
-            margin: 0 0 25px 0;
-            text-transform: uppercase;
-            color: var(--text-main);
-            line-height: 1.1;
-        }
-
-        .card-content p {
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            line-height: 1.6;
-            color: var(--text-muted);
-            margin-bottom: 35px;
-            font-size: 1.1rem;
-        }
-
-        /* --- STYLE SPÉCIFIQUE : PROFILE (ROND) --- */
-        .profile-visual {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* --- CORRECTION PHOTO DE PROFIL --- */
-        .profile-circle {
-            width: 350px;
-            height: 350px;
-            border-radius: 50%;
-            
-            /* GESTION DE L'IMAGE */
-            object-fit: cover; /* Remplit le cercle */
-            
-            /* LE RÉGLAGE MAGIQUE : */
-            /* Center = Centré horizontalement */
-            /* 20% = On part du haut (pour ne pas couper les cheveux) */
-            object-position: center 20%; 
-            
-            /* Style esthétique */
-            border: 8px solid #f8f9fa;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-            transition: transform 0.4s ease; /* Transition fluide */
-            cursor: pointer;
-            
-            /* ASTUCE : Si ta tête est encore trop grosse (zoomée), 
-               dé-commente la ligne ci-dessous (enleve les / * * /) pour dézoomer un peu : */
-            /* padding: 15px; background: white; */
-        }
-
-        /* ZOOM UNIQUEMENT AU SURVOL DE LA PHOTO */
-        .profile-circle:hover {
-            transform: scale(1.05); /* Léger zoom */
-            border-color: #e2e6ea; /* La bordure fonce très légèrement */
-        }
-
-        /* --- STYLE SPÉCIFIQUE : PROJECTS (RECTANGLE FONDU) --- */
-        .project-visual {
-            flex: 1.2;
-            height: 450px;
-            position: relative;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        /* --- NOUVEAU : GESTION DE L'IMAGE PROJETS (TAG IMG) --- */
-.project-img-fit {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Remplit tout le cadre sans déformer */
-    object-position: center;
-    transition: transform 1.2s ease;
-}
-
-/* Le zoom au survol fonctionne toujours */
-.nav-card:hover .project-img-fit {
-    transform: scale(1.05);
-}
-
-        /* Zoom sur les projets uniquement au survol du projet */
-        .nav-card:hover .project-img-bg {
-            transform: scale(1.05);
-        }
-
-        /* --- BOUTONS --- */
-        .btn-tech {
-            display: inline-block;
-            padding: 15px 40px;
-            background: var(--accent-color);
+        .card-title {
+            font-family: 'Space Grotesk';
+            font-size: 2.5rem;
             color: white;
-            text-decoration: none;
-            font-family: 'Space Grotesk', sans-serif;
+            margin: 0 0 20px 0;
             text-transform: uppercase;
+        }
+
+        .card-desc {
+            color: var(--text-grey);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            max-width: 90%;
+        }
+
+        /* Petite flèche tech */
+        .tech-arrow {
+            display: inline-flex;
+            align-items: center;
+            font-family: 'Space Grotesk';
+            color: white;
             font-size: 0.9rem;
-            font-weight: 600;
+            text-transform: uppercase;
             letter-spacing: 1px;
-            transition: all 0.3s;
-        }
-
-        .btn-tech:hover {
-            background: #000;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-        }
-
-        /* --- CONTACT --- */
-        .contact-section {
-            text-align: center;
-            padding: 80px 20px;
-            background: #fafafa;
+            transition: gap 0.3s;
         }
         
-        .contact-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.5rem;
-            color: var(--text-main);
+        .tech-arrow span {
+            font-size: 1.2rem;
+            margin-left: 10px;
+        }
+
+        .tech-card:hover .tech-arrow {
+            color: var(--accent-blue);
+            gap: 10px; /* Écarte la flèche du texte au survol */
+        }
+
+        /* --- 5. FOOTER --- */
+        .footer-cta {
+            text-align: center;
+            padding: 80px 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .btn-outline {
+            display: inline-block;
+            padding: 15px 40px;
+            border: 1px solid var(--text-grey);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px; /* Coins carrés pour aspect tech */
+            transition: 0.3s;
+            margin-top: 30px;
+            font-family: 'Space Grotesk';
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
         }
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
-            .nav-card, .nav-card.reverse {
-                flex-direction: column-reverse;
-                text-align: center;
-                gap: 30px;
+            .top-nav {
+                padding: 20px;
+                flex-direction: column;
+                gap: 20px;
             }
-            .card-tag {
-                border-left: none;
-                border-bottom: 3px solid var(--accent-color);
-                display: inline-block;
-                padding: 0 0 5px 0;
+            .dashboard-grid {
+                grid-template-columns: 1fr;
             }
-            .profile-circle {
-                width: 250px;
-                height: 250px;
-            }
-            .project-visual {
-                width: 100%;
-                height: 300px;
-                -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-                mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            .nav-section {
+                margin-top: -50px;
             }
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="logo">Valentin BIZET</div>
+    <nav class="top-nav">
+        <a href="index.html" class="nav-brand">Valentin Bizet</a>
         <ul class="nav-links">
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="about.html">Profile</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
             <li><a href="projects.html">Projects</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
 
     <header class="hero-container">
-        <div class="hero-bg" style="background-image: url('images/hero-bg.png');"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content js-scroll-fade">
+        <div class="hero-content">
             <span class="badge">SYSTEM ONLINE</span>
             <h1>Valentin BIZET</h1>
             <p class="subtitle">Where code meets the circuit. <br> Passionate about pushing IT limits to the finish line.</p>
         </div>
-        <div class="scroll-icon">↓</div>
     </header>
 
-    <div class="content-wrapper">
-        <section class="container">
+    <section class="nav-section">
+        <div class="dashboard-grid">
             
-            <div class="nav-card">
-                <div class="card-content">
-                    <span class="card-tag">01 // DRIVER</span>
-                    <h2>Profile</h2>
-                    <p>From the starting grid to the finish line: my journey in high-performance IT. Decoding the engineer behind the machine.</p>
-                    <a href="about.html" class="btn-tech">About me</a>
-                </div>
+            <a href="about.html" class="tech-card">
+                <div class="bg-number">01</div>
                 
-                <div class="profile-visual">
-                    <img src="images/profile.png" alt="Valentin Bizet" class="profile-circle">
+                <div class="card-content">
+                    <span class="card-tag">// DRIVER STATUS</span>
+                    <h2 class="card-title">Profile</h2>
+                    <p class="card-desc">From the starting grid to the finish line: my journey in high-performance IT. Decoding the engineer behind the machine.</p>
+                    <div class="tech-arrow">Initialize <span>→</span></div>
                 </div>
-            </div>
+            </a>
 
-            <div class="nav-card reverse">
-    <div class="card-content">
-        <span class="card-tag">02 // TELEMETRY</span>
-        <h2>Projects</h2>
-        <p>Lap records in logic. High-speed solutions for trackside challenges and deployed systems.</p>
-        <a href="projects.html" class="btn-tech">View Schematics</a>
-    </div>
-    
-    <div class="project-visual">
-        <img src="images/projects.png" alt="Projects" class="project-img-fit">
-    </div>
-</div>
+            <a href="projects.html" class="tech-card">
+                <div class="bg-number">02</div>
+                
+                <div class="card-content">
+                    <span class="card-tag">// TELEMETRY DATA</span>
+                    <h2 class="card-title">Projects</h2>
+                    <p class="card-desc">Lap records in logic. High-speed solutions for trackside challenges and deployed systems.</p>
+                    <div class="tech-arrow">View Schematics <span>→</span></div>
+                </div>
+            </a>
 
-        </section>
+        </div>
+    </section>
 
-        <section class="contact-section">
-            <h2 class="contact-title">Ready to initiate connection?</h2>
-            <p style="color: #666; margin-bottom: 30px;">Radio check. Let's get on the same frequency.</p>
-            <a href="contact.html" class="btn-tech">Open Channel</a>
-        </section>
+    <footer class="footer-cta">
+        <h2 style="font-family: 'Space Grotesk'; margin-bottom: 10px;">Ready to initiate connection?</h2>
+        <p style="color: var(--text-grey);">Radio check. Let's get on the same frequency.</p>
+        <a href="contact.html" class="btn-outline">Open Channel</a>
+    </footer>
 
-    </div>
-
-    <script>
-        // --- PARALLAX SIMPLE ---
-        window.addEventListener('scroll', () => {
-            const scrolled = window.scrollY;
-            const heroContent = document.querySelector('.js-scroll-fade');
-            const heroBg = document.querySelector('.hero-bg');
-
-            if(heroContent) {
-                heroContent.style.opacity = 1 - (scrolled / 500);
-                heroContent.style.transform = `translateY(${scrolled * 0.4}px)`;
-            }
-            if(heroBg) {
-                heroBg.style.transform = `translateY(${scrolled * 0.2}px) scale(${1 + scrolled/2000})`;
-            }
-        });
-
-        // --- APPARITION FLUIDE AU SCROLL ---
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                }
-            });
-        }, { threshold: 0.15 });
-
-        document.querySelectorAll('.nav-card').forEach(card => {
-            observer.observe(card);
-        });
-    </script>
 </body>
 </html>
