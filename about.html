@@ -334,6 +334,7 @@
             transition: 0.2s;
             cursor: pointer;
             font-family: 'Space Grotesk';
+            background: transparent;
         }
         
         .btn-diploma { border: 1px solid rgba(255,255,255,0.2); color: white; }
@@ -420,6 +421,8 @@
             padding: 8px 12px;
             border-radius: 4px;
             transition: 0.2s;
+            cursor: pointer;
+            background: transparent;
         }
 
         .btn-foundation:hover {
@@ -428,29 +431,52 @@
             background: rgba(16, 185, 129, 0.05);
         }
 
-        /* --- MODAL (Pop-up) --- */
+        /* --- MODAL (Pop-up GÉNÉRAL) --- */
         .modal-overlay {
             display: none; position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(15, 23, 42, 0.95);
             z-index: 1000; justify-content: center; align-items: center;
         }
+        
         .modal-content {
             background: var(--card-dark);
             border: 1px solid var(--accent-blue);
             padding: 40px; max-width: 600px; width: 90%;
             border-radius: 12px; position: relative;
         }
-        .close-modal {
-            position: absolute; top: 15px; right: 20px; font-size: 2rem;
-            color: var(--text-grey); cursor: pointer;
+        
+        /* Modale SPÉCIALE pour le PDF (plus grande) */
+        .modal-content.pdf-viewer {
+            max-width: 1000px;
+            width: 90%;
+            height: 90vh; /* Prend 90% de la hauteur de l'écran */
+            padding: 40px 10px 10px 10px; /* Padding haut pour la croix */
+            display: flex;
+            flex-direction: column;
         }
+
+        .close-modal {
+            position: absolute; top: 10px; right: 20px; font-size: 2.5rem;
+            color: var(--text-grey); cursor: pointer; z-index: 10;
+        }
+        .close-modal:hover { color: var(--accent-blue); }
+
         .modal-title {
             font-family: 'Space Grotesk'; color: white; margin-top: 0;
             border-bottom: 1px solid var(--border-light); padding-bottom: 15px;
         }
         .task-list { padding-left: 20px; color: var(--text-grey); line-height: 1.6; }
         .task-list li { margin-bottom: 10px; }
+
+        /* Style pour l'iframe PDF */
+        #pdf-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+            background: #fff; /* Fond blanc pour le PDF */
+        }
 
         @media (max-width: 900px) {
             .dual-timeline-section::before { display: none; }
@@ -484,7 +510,7 @@
                 <div class="profile-bio-card">
                     <h3 class="bio-title">Driver Profile</h3>
                     <p><strong>About:</strong><br>Currently studying for a Master's degree in Cybersecurity (CSB.School) and working at EVICYS on a work-study program, after completing a Bachelor's degree in RPI at ISITECH. With significant experience at Continental, I am familiar with the requirements of the automotive sector.</p>
-                    <p><strong>Passion & Expertise:</strong>I combine technical expertise in systems security with a burning passion for motorsport.</p>
+                    <p><strong>Passion & Expertise:</strong><br>I combine technical expertise in systems security with a burning passion for motorsport.</p>
                     <p><strong>Goal:</strong><br>To contribute to the protection of critical IT infrastructure, embedded systems, and strategic data in high-level motorsports (F1, WEC, Formula E).</p>
 
                     <a href="credentials.html" class="btn-credentials">
@@ -520,14 +546,14 @@
                         <div class="sync-card academy">
                             <span class="card-type">// ACADEMIC SOURCE</span>
                             <div class="header-mini">
-                                <img src="assets/logo-csb.png" alt="CSB" class="logo-mini">
+                                <img src="logos/logo-csb.png" alt="CSB" class="logo-mini">
                                 <div>
                                     <h4 class="role-title">Master Cybersecurity</h4>
                                     <span class="role-place">CSB.SCHOOL, Lyon</span>
                                 </div>
                             </div>
                             <p class="desc-mini">Expert in cybersecurity solutions development</p>
-                            <a href="docs/diploma-csb.pdf" target="_blank" class="btn-mini btn-diploma">Diploma Status</a>
+                            <button onclick="openPdf('docs')" class="btn-mini btn-diploma">DIPLOMA IS IN PROGRESS ...</button>
                         </div>
 
                         <div class="sync-icon">⇄</div>
@@ -535,7 +561,7 @@
                         <div class="sync-card field">
                             <span class="card-type">// FIELD DEPLOYMENT</span>
                             <div class="header-mini">
-                                <img src="assets/logo-evicys.png" alt="Company" class="logo-mini">
+                                <img src="logos/logo-evicys.png" alt="Company" class="logo-mini">
                                 <div>
                                     <h4 class="role-title">Cybersecurity Apprentice</h4>
                                     <span class="role-place">EVICYS, Lyon</span>
@@ -554,14 +580,14 @@
                         <div class="sync-card academy">
                             <span class="card-type">// ACADEMIC SOURCE</span>
                             <div class="header-mini">
-                                <img src="assets/logo-isitech.png" alt="School" class="logo-mini">
+                                <img src="logos/logo-isitech.png" alt="School" class="logo-mini">
                                 <div>
                                     <h4 class="role-title">Bachelor IT Project Manager</h4>
                                     <span class="role-place">ISITECH, Lyon</span>
                                 </div>
                             </div>
                             <p class="desc-mini">Systems and networks specialties</p>
-                            <a href="docs/diploma-bts.pdf" target="_blank" class="btn-mini btn-diploma">View Diploma [PDF]</a>
+                            <button onclick="openPdf('docs')" class="btn-mini btn-diploma">DIPLOMA</button>
                         </div>
 
                         <div class="sync-icon">⇄</div>
@@ -569,7 +595,7 @@
                         <div class="sync-card field">
                             <span class="card-type">// FIELD DEPLOYMENT</span>
                             <div class="header-mini">
-                                <img src="assets/logo-conti.png" alt="Lheritier" class="logo-mini">
+                                <img src="logos/logo-conti.png" alt="Lheritier" class="logo-mini">
                                 <div>
                                     <h4 class="role-title">Support Technician</h4>
                                     <span class="role-place">CONTINENTAL, Lyon</span>
@@ -593,7 +619,7 @@
                             <h4 class="foundation-title">General High School Diploma</h4>
                             <span class="foundation-school">Saint Charles High School, Lyon</span>
                         </div>
-                        <a href="docs/diploma-bac.pdf" target="_blank" class="btn-foundation">View Document [PDF]</a>
+                        <button onclick="openPdf('credentials/Baccalauréat Mathématiques-Physiques:Chimies.pdf')" class="btn-foundation">DIPLOMA</button>
                     </div>
 
                     <div class="foundation-card">
@@ -602,12 +628,24 @@
                             <h4 class="foundation-title">National Diploma</h4>
                             <span class="foundation-school">Saint Charles Middle School, Lyon</span>
                         </div>
-                        <a href="docs/diploma-brevet.pdf" target="_blank" class="btn-foundation">View Document [PDF]</a>
+                        <button onclick="openPdf('credentials/DNB.pdf')" class="btn-foundation">DIPLOMA</button>
                     </div>
 
                 </div>
             </div>
 
+        </div>
+    </div>
+
+    <div id="modal-pdf-viewer" class="modal-overlay">
+        <div class="modal-content pdf-viewer">
+            <span class="close-modal" onclick="closeModal('modal-pdf-viewer')">&times;</span>
+            
+            <iframe id="pdf-frame" src="" type="application/pdf"></iframe>
+            
+            <p style="text-align: center; margin-top: 10px; color: var(--text-grey); font-size: 0.8rem;">
+                Document loaded securely. External saving options disabled.
+            </p>
         </div>
     </div>
 
@@ -635,17 +673,40 @@
     </div>
 
     <script>
+        // Fonction pour ouvrir les modales de texte
         function openModal(modalId) {
             document.getElementById(modalId).style.display = 'flex';
         }
 
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
+        // Fonction SPÉCIALE pour ouvrir le PDF
+        function openPdf(fileUrl) {
+            const modal = document.getElementById('modal-pdf-viewer');
+            const iframe = document.getElementById('pdf-frame');
+            
+            // On ajoute #toolbar=0&navpanes=0&scrollbar=0 pour cacher les menus du PDF
+            iframe.src = fileUrl + "#toolbar=0&navpanes=0&scrollbar=0";
+            
+            modal.style.display = 'flex';
         }
 
+        // Fonction pour fermer n'importe quelle modale
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            
+            // Si c'est le PDF, on vide la source pour arrêter le chargement
+            if(modalId === 'modal-pdf-viewer') {
+                document.getElementById('pdf-frame').src = "";
+            }
+        }
+
+        // Fermer au clic extérieur
         window.onclick = function(event) {
             if (event.target.classList.contains('modal-overlay')) {
                 event.target.style.display = 'none';
+                // Si c'est le PDF qu'on ferme en cliquant dehors
+                if(event.target.id === 'modal-pdf-viewer') {
+                    document.getElementById('pdf-frame').src = "";
+                }
             }
         }
     </script>
