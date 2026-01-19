@@ -1,918 +1,156 @@
-/* === VARIABLES STYLE "LABORATOIRE" (CLATR) === */
+/* === DESIGN SYSTEM: CRITICAL INFRASTRUCTURE (OT/ICS) === */
 :root {
-    --bg-color: #f4f5f7; /* Gris très clair / Blanc cassé "Premium" */
-    --card-bg: #ffffff; /* Cartes blanches pures */
-    --border-color: rgba(0, 0, 0, 0.08); /* Bordures grises subtiles */
+    /* FOND : Ambiance "Control Room" */
+    --bg-dark: #1e2024;       /* Gris anthracite profond (Matériel industriel) */
+    --card-dark: #25282d;     /* Modules légèrement plus clairs */
+    --grid-line: rgba(255, 255, 255, 0.03); /* Grille de fond */
+
+    /* TEXTE : Lisibilité maximale */
+    --text-white: #e2e8f0;    /* Blanc cassé (reposant) */
+    --text-grey: #94a3b8;     /* Métadonnées */
     
-    --text-main: #111111; /* Noir presque pur pour le contraste */
-    --text-muted: #666666; /* Gris moyen pour les sous-titres */
+    /* ACCENTS : Codes couleurs industriels */
+    --accent-primary: #3b82f6; /* Bleu "Engineering" (Confiance, Tech) */
+    --status-success: #10b981; /* Vert "System OK" */
+    --status-warning: #f59e0b; /* Orange "Maintenance/Action" */
+    --status-alert: #ef4444;   /* Rouge "Critical" */
+
+    /* BORDURES & STRUCTURE */
+    --border-tech: 1px solid rgba(255, 255, 255, 0.1);
+    --border-active: 1px solid var(--accent-primary);
     
-    --accent: #0051ff; /* Bleu "Ingénierie" (plus sérieux que le néon) */
-    
-    --font-head: 'Space Grotesk', sans-serif;
-    --font-body: 'Inter', sans-serif;
-    
-    --shadow-soft: 0 10px 30px -10px rgba(0,0,0,0.08); /* L'ombre douce Apple */
+    /* EFFETS */
+    --shadow-panel: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--text-main);
-    font-family: var(--font-body);
+    background-color: var(--bg-dark);
+    /* Effet papier millimétré subtil */
+    background-image: 
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 40px 40px;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-white);
     overflow-x: hidden;
 }
 
-/* === EFFET PAPIER TEXTURÉ (OPTIONNEL) === */
-.noise-overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: url('https://grainy-gradients.vercel.app/noise.svg');
-    opacity: 0.03; /* Très subtil sur fond blanc */
-    z-index: 9999;
-    pointer-events: none;
-    filter: invert(1); /* On inverse le bruit pour qu'il soit gris sur blanc */
-}
-
-.ambient-glow {
-    /* On retire la lueur verte/néon qui fait bizarre sur fond blanc */
-    display: none; 
-}
-
-/* === NAVIGATION === */
-.navbar {
+/* --- SYSTEM BAR (Navigation) --- */
+.system-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 5%;
-    position: fixed;
-    width: 100%;
+    padding: 15px 30px;
+    background: #111316;
+    border-bottom: 2px solid var(--accent-primary);
+    position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(244, 245, 247, 0.85); /* Fond semi-transparent clair */
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-color);
+    font-family: 'Space Grotesk', monospace;
+    font-size: 0.85rem;
+    color: var(--text-grey);
 }
 
-.logo {
-    font-family: var(--font-head);
+.sys-id {
+    color: var(--text-white);
     font-weight: 700;
-    font-size: 1.2rem;
-    letter-spacing: -0.5px;
-    color: var(--text-main);
-}
-
-.nav-links {
-    list-style: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     display: flex;
-    gap: 2rem;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: var(--text-main);
-    font-size: 0.9rem;
-    font-weight: 600;
-    opacity: 0.6;
-    transition: all 0.3s;
-}
-
-.nav-links a:hover, .nav-links a.active { 
-    opacity: 1; 
-    color: var(--accent);
-}
-
-/* === HERO SECTION === */
-.hero-container {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+    gap: 10px;
 }
 
-.hero-bg {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-size: cover;
-    background-position: center;
-    z-index: -2;
-    /* ASTUCE : On garde l'image mais on la rend très claire pour qu'on puisse écrire en noir dessus */
-    opacity: 0.15; 
-    filter: grayscale(100%) contrast(1.1);
+.indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: var(--status-success);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--status-success);
+}
+.blink { animation: blinking 2s infinite; }
+@keyframes blinking { 0% {opacity: 1;} 50% {opacity: 0.4;} 100% {opacity: 1;} }
+
+.sys-nav {
+    display: flex;
+    gap: 30px;
 }
 
-.hero-overlay {
-    /* Dégradé blanc en bas pour fondre l'image */
-    position: absolute;
-    bottom: 0; left: 0; width: 100%; height: 40%;
-    background: linear-gradient(to top, var(--bg-color), transparent);
-    z-index: -1;
+.sys-link {
+    text-decoration: none;
+    color: var(--text-grey);
+    text-transform: uppercase;
+    transition: 0.3s;
 }
+.sys-link:hover, .sys-link.active { color: var(--accent-primary); }
 
-.hero-content { z-index: 2; margin-top: 50px; }
+/* --- TYPOGRAPHIE --- */
+h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; margin-top: 0; }
+h1 { font-size: 3rem; text-transform: uppercase; letter-spacing: -1px; }
 
 .badge {
-    border: 1px solid #000000; /* Bordure noire */
-    color: #ffffff; /* Texte BLANC */
-    background: #000000; /* Fond NOIR */
-    padding: 6px 14px;
-    border-radius: 50px;
+    font-family: 'Space Grotesk';
     font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 1px;
+    padding: 4px 8px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--accent-primary);
+    border-radius: 2px;
     text-transform: uppercase;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Petite ombre portée */
-}
-
-.hero-content h1 {
-    font-family: var(--font-head);
-    font-size: 5rem;
-    line-height: 0.95;
-    margin: 1.5rem 0;
-    letter-spacing: -3px;
-    color: #000000; /* Assure-toi que c'est du noir pur */
-    
-    /* LA MAGIE EST ICI : */
-    text-shadow: 0 0 30px rgba(255, 255, 255, 0.9), 
-                 0 0 10px rgba(255, 255, 255, 0.8);
-}
-
-.subtitle {
-    color: #222222; /* Un gris un peu plus foncé pour la lisibilité */
-    font-size: 1.1rem;
-    max-width: 500px;
-    margin: 0 auto;
-    font-weight: 500; /* Un peu plus gras */
-    
-    /* Le petit halo pour détacher du fond */
-    text-shadow: 0 0 20px rgba(255, 255, 255, 1);
-    background: rgba(255, 255, 255, 0.3); /* Optionnel : léger fond blanc semi-transparent */
-    padding: 10px; /* Si tu mets le fond, ajoute un peu d'espace */
-    border-radius: 10px; /* Arrondir les angles */
-}
-
-.scroll-icon {
-    position: absolute;
-    bottom: 40px;
-    color: var(--text-main);
-    font-size: 1.5rem;
-    animation: bounce 2s infinite;
-}
-
-@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
-
-/* === BENTO GRID SECTION === */
-.projects-section {
-    padding: 100px 5%;
-    position: relative;
-    z-index: 10;
-    background: var(--bg-color);
-}
-
-.section-header { margin-bottom: 40px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; }
-.section-header h2 { font-family: var(--font-head); font-size: 1.5rem; font-weight: 600; color: var(--text-main); }
-
-.bento-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px; /* Un peu plus d'espace en mode clair */
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* === STYLE DES CARTES (VERSION CLAIRE) === */
-.card {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    overflow: hidden;
-    text-decoration: none;
-    color: var(--text-main);
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    display: flex;
-    flex-direction: column;
-    /* L'ombre est clé pour le mode clair */
-    box-shadow: var(--shadow-soft);
-}
-
-.card:hover {
-    transform: translateY(-5px); /* Monte légèrement */
-    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15); /* Ombre plus forte */
-    border-color: rgba(0,0,0,0.15);
-}
-
-.card-large { grid-column: span 2; }
-.card-square { grid-column: span 1; }
-
-.card-image {
-    height: 250px;
-    width: 100%;
-    position: relative;
-    padding: 20px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-end;
-    /* Fond gris clair par défaut pour les images */
-    background: #eef0f5; 
-    border-bottom: 1px solid var(--border-color);
-}
-
-.tech-tag {
-    background: #ffffff;
-    color: var(--text-main);
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-.card-info { padding: 30px; }
-.card-info h3 { font-family: var(--font-head); font-size: 1.4rem; margin-bottom: 8px; font-weight: 700; }
-.card-info p { color: var(--text-muted); font-size: 0.95rem; }
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .hero-content h1 { font-size: 3rem; }
-    .bento-grid { grid-template-columns: 1fr; }
-    .card-large { grid-column: span 1; }
-}
-
-.hero-bg {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-size: cover;
-    background-position: center;
-    z-index: -2;
-    
-    /* L'ASTUCE "BLUEPRINT" */
-    filter: invert(1) grayscale(100%); /* Inverse les couleurs (Noir->Blanc) */
-    opacity: 0.5; /* Ajuste selon ton goût */
-    mix-blend-mode: darken;
-}
-
-
-/* =========================================
-   PAGE PROFIL (About.html) - STYLE LABO
-   ========================================= */
-
-   /* --- SECTION PROFIL ÉTIRÉE --- */
-
-/* 1. Un conteneur très large spécifique pour cette partie */
-.container-wide {
-    max-width: 1600px;  /* Beaucoup plus large que les 1200px habituels */
-    width: 95%;         /* Occupe 95% de l'écran sur les grands moniteurs */
-    margin: 0 auto;     /* Centré */
-    padding: 0 20px;
-}
-
-/* 2. La mise en page globale (Gauche: Texte / Droite: Les 4 carrés) */
-.profile-layout {
-    display: flex;
-    gap: 60px; /* Grand espace entre la colonne "About" et les "Stats" */
-    align-items: flex-start; /* Aligne tout en haut */
-    margin-top: 50px;
-}
-
-/* 3. Colonne de Gauche (Le texte "About", "Passion"...) */
-.profile-text-column {
-    flex: 1; /* Prend 1 portion de l'espace */
-    min-width: 350px; /* Ne devient jamais trop petit */
-    background: #fff;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
-/* 4. Colonne de Droite (La grille avec BASE, STATUS...) */
-.profile-stats-grid {
-    flex: 2; /* Prend 2 portions de l'espace (donc 2x plus large que le texte) */
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 colonnes strictes */
-    gap: 30px; /* Espace aéré entre les cartes */
-}
-
-/* 5. Les cartes individuelles (Base, Status, Focus, Languages) */
-.stat-card {
-    background: #fff;
-    padding: 40px 30px; /* Padding généreux pour étirer visuellement */
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 180px; /* Force une hauteur minimale harmonieuse */
-    transition: transform 0.3s ease;
-}
-
-.stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-}
-
-/* TYPOGRAPHIE INTERNE DES CARTES */
-.stat-label {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    color: #999;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-}
-
-.stat-value {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #1a1f2c;
-}
-
-.stat-highlight {
-    color: #2563eb; /* Le bleu Tech défini avant */
-}
-
-/* RESPONSIVE : Sur tablette et mobile, on empile tout */
-@media (max-width: 1024px) {
-    .profile-layout {
-        flex-direction: column;
-    }
-    .profile-text-column, .profile-stats-grid {
-        width: 100%; /* Prend toute la largeur */
-        flex: none;
-    }
-}
-
-@media (max-width: 768px) {
-    .profile-stats-grid {
-        grid-template-columns: 1fr; /* 1 seule colonne sur mobile */
-    }
-}
-
-.profile-container {
-    padding: 120px 5% 50px 5%; /* Marge pour la navbar fixe */
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.profile-header {
-    text-align: center;
-    margin-bottom: 60px;
-}
-
-.profile-header h1 {
-    font-size: 3.5rem;
-    font-family: var(--font-head);
-    color: var(--text-main);
-    letter-spacing: -2px;
-    margin-top: 20px;
-}
-
-.section-title {
-    font-family: var(--font-head);
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 10px;
     letter-spacing: 1px;
-    color: var(--text-muted);
-}
-
-/* === 1. GRID BIO & STATS (NOUVEAU DESIGN) === */
-.specs-grid {
-    display: grid;
-    /* On donne plus de place à la bio (60%) et le reste aux stats */
-    grid-template-columns: 1.5fr 1fr; 
-    gap: 40px; /* BEAUCOUP plus d'espace entre les deux blocs */
-    margin-bottom: 100px;
-    align-items: stretch; /* Les blocs font la même hauteur */
-}
-
-/* --- La Carte Bio --- */
-.card-bio {
-    padding: 40px; /* On laisse le texte respirer */
-    background: #ffffff;
-    border: 1px solid rgba(0,0,0,0.05);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.03); /* Ombre très douce */
-    border-radius: 20px;
-}
-
-.card-bio h3 {
-    margin-bottom: 25px;
-    color: var(--accent); /* Titre en bleu pour le peps */
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-}
-
-.bio-content p {
-    font-size: 1.05rem; /* Texte un peu plus gros */
-    line-height: 1.8; /* Espace entre les lignes pour la lisibilité */
-    color: #444;
-    margin-bottom: 20px;
-}
-
-.bio-content .intro {
-    font-size: 1.2rem;
-    color: #000;
+    display: inline-block;
     margin-bottom: 15px;
 }
 
-/* --- Le Dashboard de Stats (À droite) --- */
-/* --- Le Dashboard de Stats (NOUVELLE VERSION "STRIPS") --- */
-.stats-dashboard {
-    display: grid;
-    grid-template-columns: 1fr; /* 1 seule colonne (donc toute la largeur) */
-    gap: 15px; /* Espace réduit entre les barres */
-}
+/* --- LAYOUT --- */
+.container { max-width: 1200px; margin: 60px auto; padding: 0 20px; }
+.section-header { text-align: center; margin-bottom: 80px; }
 
-.stat-box {
-    background: #ffffff;
-    /* On réduit la hauteur (padding vertical) mais on garde la largeur (padding horizontal) */
-    padding: 15px 25px; 
-    border-radius: 12px; /* Arrondi un peu plus léger */
-    border: 1px solid rgba(0,0,0,0.05);
-    
-    /* MAGIE ICI : On met les éléments côte à côte */
-    display: flex; 
-    flex-direction: row; 
-    justify-content: space-between; /* Label à gauche, Valeur à droite */
-    align-items: center; /* Bien centrés verticalement */
-    
-    transition: transform 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.02);
-}
-
-.stat-box:hover {
-    transform: translateX(5px); /* Au survol, ça glisse vers la droite */
-    border-color: var(--accent);
-}
-
-.stat-box .label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #999;
-    letter-spacing: 1px;
-    margin-bottom: 0; /* Plus de marge car on est à l'horizontale */
-    font-family: var(--font-head);
-}
-
-.stat-box .value {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #000;
-    font-family: var(--font-head);
-    text-align: right; /* On assure que le texte est bien à droite */
-}
-
-.stat-box .value.highlight {
-    color: var(--accent); /* "Open to Work" en bleu */
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    .specs-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-}
-
-/* === 3. TRACK RECORD (NOUVEAU DESIGN "SAISONS") === */
-.timeline-container {
-    display: flex;
-    flex-direction: column;
-    gap: 60px; /* Espace entre les saisons */
-    padding-left: 10px;
-}
-
-/* --- Le Bloc Saison --- */
-.track-cycle {
+/* --- COMPOSANTS UI INDUSTRIELS --- */
+.tech-card {
+    background: var(--card-dark);
+    border: var(--border-tech);
+    border-radius: 2px; /* Coins carrés = Industriel */
+    padding: 30px;
     position: relative;
+    transition: 0.3s;
+}
+.tech-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
-.cycle-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.season-badge {
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: var(--text-main);
-    background: #f0f0f0;
-    padding: 5px 10px;
-    border-radius: 4px;
-}
-
-.status {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    color: var(--accent);
-}
-
-.status.complete {
-    color: #999; /* Gris pour ce qui est fini */
-}
-
-/* --- Le Conteneur qui lie École et Travail --- */
-.cycle-content {
-    border-left: 3px solid #e0e0e0; /* La ligne grise qui lie les deux */
-    margin-left: 15px; /* Décalage par rapport au bord */
-    padding-left: 30px; /* Espace entre la ligne et le texte */
-    display: flex;
-    flex-direction: column;
-    gap: 30px; /* Espace entre Entreprise et École */
-    position: relative;
-}
-
-/* Si c'est la saison actuelle, la ligne est bleue ! */
-.track-cycle.current .cycle-content {
-    border-left-color: var(--accent);
-}
-
-/* --- Les Éléments (Nodes) --- */
-.event-node {
-    position: relative;
-    /* C'est ici qu'on active l'alignement horizontal */
-    display: flex; 
-    justify-content: space-between; /* Texte à gauche, Logo à droite */
-    align-items: center; /* Centré verticalement */
-    gap: 20px; /* Espace entre le texte et le logo */
-}
-
-/* Le point sur la timeline (reste inchangé) */
-.event-node::before {
-    content: '';
-    position: absolute;
-    left: -38px;
-    top: 50%; /* On le centre par rapport à la hauteur du bloc */
-    transform: translateY(-50%); /* Ajustement fin du centrage */
-    width: 12px; height: 12px;
-    background: var(--bg-color);
-    border: 2px solid #999;
-    border-radius: 50%;
-    z-index: 1;
-}
-
-.track-cycle.current .event-node::before {
-    border-color: var(--accent);
-}
-
-/* --- Détails (Texte) --- */
-.node-details {
-    flex: 1; /* Prend toute la place disponible */
-}
-
-.node-details .period {
-    font-size: 0.75rem;
-    font-family: var(--font-head);
-    color: var(--accent);
-    font-weight: 700;
-    display: block;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.node-details h3 {
-    font-size: 1.1rem;
-    margin-bottom: 5px;
-    color: var(--text-main);
-}
-
-.node-details .place {
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 8px;
-}
-
-.node-details p {
-    font-size: 0.95rem;
-    color: #666;
-    line-height: 1.5;
-}
-
-/* --- Le Logo à Droite --- */
-.node-logo {
-    cursor: pointer; /* Important pour montrer que c'est cliquable */
-    /* ... le reste de ton css node-logo ... */
-    flex-shrink: 0; /* Empêche le logo de s'écraser si l'écran est petit */
-    width: 80px;  /* Taille fixe du conteneur */
-    height: 80px;
-    background: #ffffff;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(0,0,0,0.05); /* Légère bordure */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.03); /* Petite ombre */
-    padding: 10px; /* Marge interne pour que le logo ne touche pas les bords */
-}
-
-.node-logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* L'image s'adapte sans être déformée */
-    filter: grayscale(100%); /* Optionnel : Logo en Noir et Blanc pour le style */
-    transition: filter 0.3s ease;
-}
-
-/* Au survol, le logo reprend ses couleurs */
-.event-node:hover .node-logo img {
-    filter: grayscale(0%);
-}
-
-/* RESPONSIVE MOBILE */
-@media (max-width: 600px) {
-    .event-node {
-        flex-direction: column-reverse; /* Logo au dessus sur mobile, ou en dessous */
-        align-items: flex-start;
-    }
-    .node-logo {
-        width: 60px; height: 60px; /* Plus petit sur mobile */
-        margin-bottom: 10px;
-    }
-    .event-node::before {
-        top: 20px; /* On remet le point en haut sur mobile */
-    }
-}
-
-/* RESPONSIVE MOBILE */
-@media (max-width: 768px) {
-    .specs-grid, .skills-wrapper {
-        grid-template-columns: 1fr; /* Tout en une colonne sur mobile */
-    }
-    .profile-header h1 { font-size: 2.5rem; }
-}
-
-
-/* =========================================
-   PAGE CONTACT - COMM CENTER
-   ========================================= */
-
-.contact-container {
-    /* Centre tout au milieu de l'écran */
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 100px 20px 40px 20px;
-    background: var(--bg-color);
-}
-
-.comm-card {
-    background: #ffffff;
-    width: 100%;
-    max-width: 600px; /* Pas trop large pour rester élégant */
-    padding: 50px;
-    border-radius: 24px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.04);
-    border: 1px solid rgba(0,0,0,0.05);
-    text-align: center;
-}
-
-/* --- Status & Header --- */
-.status-indicator {
+.btn-primary {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: rgba(0, 255, 0, 0.08); /* Vert très pâle */
-    padding: 6px 12px;
-    border-radius: 50px;
-    margin-bottom: 25px;
-}
-
-.status-indicator .dot {
-    width: 8px; height: 8px;
-    background: #00cc66; /* Vert vif */
-    border-radius: 50%;
-    box-shadow: 0 0 10px #00cc66;
-    animation: pulse 2s infinite;
-}
-
-.status-indicator .text {
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: #008844;
-    letter-spacing: 1px;
-}
-
-@keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.4; }
-    100% { opacity: 1; }
-}
-
-.comm-header h1 {
-    font-family: var(--font-head);
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-    letter-spacing: -1px;
-}
-
-.comm-header p {
-    color: var(--text-muted);
-    line-height: 1.6;
-    margin-bottom: 40px;
-}
-
-/* --- Les Boutons --- */
-.action-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.action-btn {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    background: var(--bg-color); /* Fond gris clair */
-    border-radius: 16px;
-    text-decoration: none;
-    color: var(--text-main);
-    border: 1px solid transparent;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* Icône à gauche (carré blanc) */
-.icon-box {
-    width: 50px; height: 50px;
-    background: #ffffff;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
-    margin-right: 20px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-}
-
-.btn-info {
-    text-align: left;
-    flex-grow: 1; /* Pousse la flèche à droite */
-}
-
-.btn-info .label {
-    display: block;
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: var(--text-muted);
-    letter-spacing: 1px;
-    margin-bottom: 4px;
-}
-
-.btn-info .value {
-    display: block;
-    font-size: 1rem;
-    font-weight: 600;
-    font-family: var(--font-head);
-}
-
-.arrow {
-    color: var(--text-muted);
-    transition: transform 0.3s;
-}
-
-/* Hover Effects */
-.action-btn:hover {
-    background: #ffffff;
-    border-color: var(--accent);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 81, 255, 0.1);
-}
-
-.action-btn:hover .arrow {
-    transform: translateX(5px); /* La flèche bouge vers la droite */
-    color: var(--accent);
-}
-
-.action-btn:hover .icon-box {
-    color: var(--accent);
-}
-
-/* Footer note */
-.footer-note {
-    margin-top: 40px;
-    font-size: 0.8rem;
-    color: #999;
-    border-top: 1px solid rgba(0,0,0,0.05);
-    padding-top: 20px;
-}
-
-/* Responsive Mobile */
-@media (max-width: 600px) {
-    .comm-card { padding: 30px 20px; }
-    .comm-header h1 { font-size: 2rem; }
-    .action-btn { padding: 15px; }
-    .icon-box { width: 40px; height: 40px; font-size: 1rem; }
-}
-
-/* =========================================
-   SECTION CERTIFICATIONS & MOOCS
-   ========================================= */
-
-.certifs-section {
-    margin-top: 60px;    /* Espace au-dessus (après les stats) */
-    margin-bottom: 60px; /* Espace en-dessous (avant la timeline) */
-}
-
-.certif-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* Espace entre chaque ligne */
-}
-
-.certif-card {
-    display: flex;
-    align-items: center;
-    background: #ffffff;
-    border: 1px solid rgba(0,0,0,0.05);
-    padding: 20px 25px;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-}
-
-.certif-card:hover {
-    transform: translateX(5px); /* Petit mouvement au survol */
-    border-color: var(--accent); /* Bordure bleue */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
-/* La date en gras à gauche */
-.certif-date {
-    font-family: var(--font-head);
-    font-weight: 700;
-    color: var(--accent);
-    font-size: 1.1rem;
-    margin-right: 30px;
-    min-width: 60px; /* Pour que tout soit bien aligné */
-}
-
-/* Les infos au milieu */
-.certif-details {
-    flex-grow: 1; /* Prend toute la place disponible */
-}
-
-.certif-details h3 {
-    font-size: 1rem;
-    margin-bottom: 4px;
-    color: var(--text-main);
-}
-
-.certif-details .issuer {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #999;
-    letter-spacing: 1px;
+    padding: 12px 25px;
+    background: transparent;
+    border: 1px solid var(--accent-primary);
+    color: var(--accent-primary);
+    font-family: 'Space Grotesk';
     text-transform: uppercase;
-}
-
-/* Le bouton à droite */
-.certif-btn {
     text-decoration: none;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--text-main);
-    border: 1px solid #e0e0e0;
-    padding: 8px 15px;
-    border-radius: 6px;
-    transition: all 0.2s ease;
-    background: #fafafa;
+    font-weight: 600;
+    transition: 0.3s;
+    cursor: pointer;
+    border-radius: 2px;
+}
+.btn-primary:hover {
+    background: var(--accent-primary);
+    color: #000;
 }
 
-.certif-btn i {
-    margin-left: 5px;
-    font-size: 0.7rem;
-}
-
-.certif-btn:hover {
-    background: var(--text-main);
-    color: #ffffff; /* Texte devient blanc */
-    border-color: var(--text-main);
-}
-
-/* RESPONSIVE MOBILE */
-@media (max-width: 600px) {
-    .certif-card {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-    .certif-btn {
-        width: 100%; /* Bouton pleine largeur sur mobile */
-        text-align: center;
-    }
+/* --- MEDIA QUERIES --- */
+@media (max-width: 900px) {
+    .system-bar { flex-direction: column; gap: 15px; padding: 15px; }
+    .sys-nav { gap: 15px; font-size: 0.8rem; }
+    h1 { font-size: 2rem; }
 }

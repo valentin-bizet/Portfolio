@@ -5,711 +5,196 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile - Valentin Bizet</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     
     <style>
-        /* --- DESIGN SYSTEM --- */
-        :root {
-            --bg-dark: #0f172a;       
-            --card-dark: #1e293b;     
-            --text-white: #f8fafc;
-            --text-grey: #94a3b8;
-            --accent-blue: #38bdf8;
-            --success-green: #10b981; 
-            --border-light: rgba(255,255,255,0.1);
-        }
-
-        html { scroll-behavior: smooth; }
-        * { box-sizing: border-box; }
-
-        body {
-            background-color: var(--bg-dark);
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            color: var(--text-white);
-            overflow-x: hidden;
-        }
-
-        /* --- NAVIGATION --- */
-        .top-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 30px 50px;
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .nav-brand {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: white;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 40px;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-links a {
-            color: var(--text-grey);
-            text-decoration: none;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover, .nav-links a.active { color: var(--accent-blue); }
-
-        /* --- LAYOUT --- */
-        .content-wrapper { padding: 80px 20px; }
-        .container-wide { max-width: 1400px; width: 95%; margin: 0 auto; }
-        .section-header { text-align: center; margin-bottom: 60px; }
-
-        .badge {
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--accent-blue);
-            padding: 5px 12px;
-            border-radius: 4px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
-        h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2.5rem, 4vw, 3.5rem);
-            margin: 10px 0;
-            color: white;
-        }
-
-        /* --- PROFILE SECTION --- */
-        .profile-layout {
-            display: flex;
-            gap: 40px;
-            align-items: stretch;
-            margin-bottom: 100px;
-        }
-
-        .profile-bio-card {
-            flex: 1.3;
-            background: var(--card-dark);
-            border: 1px solid var(--border-light);
-            border-radius: 16px;
-            padding: 40px;
-        }
-
-        .bio-title {
-            font-family: 'Space Grotesk';
-            color: var(--accent-blue);
-            font-size: 1.2rem;
-            margin-top: 0;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            border-bottom: 1px solid var(--border-light);
-            padding-bottom: 15px;
-        }
-
-        .profile-bio-card p {
-            line-height: 1.8;
-            color: var(--text-grey);
-            margin-bottom: 20px;
-        }
-        .profile-bio-card strong { color: white; font-weight: 600; }
-
-        .btn-credentials {
-            display: inline-flex;
-            align-items: center;
-            margin-top: 20px;
-            padding: 12px 25px;
-            border: 1px solid var(--accent-blue);
-            color: var(--accent-blue);
-            text-decoration: none;
-            font-family: 'Space Grotesk';
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            border-radius: 4px;
-            transition: 0.3s;
-            background: rgba(56, 189, 248, 0.05);
-            cursor: pointer;
-        }
-        .btn-credentials:hover {
-            background: var(--accent-blue);
-            color: #000;
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
-        }
-
-        .profile-stats-grid {
-            flex: 1;
+        /* CSS Spécifique à About */
+        .profile-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 40px;
+            margin-bottom: 80px;
         }
 
-        .stat-card {
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid var(--border-light);
-            padding: 25px;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: 0.3s;
+        .bio-header {
+            border-bottom: 1px solid var(--border-tech);
+            padding-bottom: 20px; margin-bottom: 20px;
         }
-        .stat-card:hover { border-color: var(--accent-blue); background: rgba(30, 41, 59, 0.8); }
-        .stat-card.full-width { grid-column: span 2; }
-        
-        .stat-label {
-            font-family: 'Space Grotesk';
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            color: var(--text-grey);
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-        .stat-value {
-            font-family: 'Space Grotesk';
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: white;
-        }
-        .stat-value.highlight { color: var(--accent-blue); }
+        .bio-header h2 { color: var(--text-white); font-size: 1.8rem; margin-bottom: 5px;}
+        .bio-role { color: var(--accent-primary); font-family: 'Space Grotesk'; text-transform: uppercase;}
 
-        .mobility-list { list-style: none; padding: 0; margin: 0; }
-        .mobility-list li {
-            font-size: 1rem;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            color: white;
+        .kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .kpi-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 15px;
         }
-        .mobility-list li::before {
-            content: '➢'; 
-            color: var(--accent-blue);
-            margin-right: 10px;
-            font-size: 0.8rem;
-        }
+        .kpi-label { font-size: 0.7rem; color: var(--text-grey); text-transform: uppercase; display: block; margin-bottom: 5px; font-family: 'Space Grotesk'; }
+        .kpi-value { font-size: 1.1rem; color: var(--text-white); font-weight: 600; font-family: 'Space Grotesk'; }
 
-        /* --- DUAL TIMELINE (ALTERNANCE MODE) --- */
-        .dual-timeline-section {
-            display: flex;
-            flex-direction: column;
-            gap: 60px;
+        /* Timeline Log Style */
+        .timeline-log {
             position: relative;
+            border-left: 2px solid var(--border-tech);
+            margin-left: 10px;
+            padding-left: 30px;
         }
-        
-        /* Ligne verticale centrale */
-        .dual-timeline-section::before {
-            content: '';
-            position: absolute;
-            left: 50%; top: 0; bottom: 0;
-            width: 2px; background: var(--border-light);
-            transform: translateX(-50%);
-            z-index: 0;
+        .log-entry { margin-bottom: 50px; position: relative; }
+        .log-marker {
+            position: absolute; left: -36px; top: 0;
+            width: 10px; height: 10px; background: var(--bg-dark);
+            border: 2px solid var(--accent-primary); border-radius: 50%;
         }
-
-        /* Un bloc temps (ex: 2024-Present) */
-        .time-block {
-            position: relative;
-            z-index: 1;
+        .log-date {
+            display: inline-block; background: var(--accent-primary); color: #000;
+            font-family: 'Space Grotesk'; font-size: 0.75rem; font-weight: 700;
+            padding: 2px 8px; border-radius: 2px; margin-bottom: 10px;
         }
 
-        /* L'étiquette date centrale */
-        .date-badge {
-            display: table;
-            margin: 0 auto 30px auto;
-            background: var(--bg-dark);
-            border: 1px solid var(--accent-blue);
-            color: var(--accent-blue);
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-family: 'Space Grotesk';
-            font-weight: 700;
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
-            position: relative;
-            z-index: 2;
+        .dual-card-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .log-card {
+            background: var(--card-dark); border: var(--border-tech); padding: 20px;
         }
-
-        /* Conteneur des deux cartes (Ecole + Entreprise) */
-        .sync-container {
-            display: grid;
-            grid-template-columns: 1fr 50px 1fr; /* Carte - Icone - Carte */
-            align-items: center;
-            gap: 0;
-        }
-
-        .sync-icon {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 40px;
-            color: var(--text-grey);
-            font-family: 'Space Grotesk';
-            font-size: 1.5rem;
-        }
-
-        .sync-card {
-            background: var(--card-dark);
-            border: 1px solid var(--border-light);
-            padding: 30px;
-            border-radius: 12px;
-            transition: 0.3s;
-            position: relative;
-        }
-
-        .sync-card:hover {
-            border-color: var(--accent-blue);
-            transform: translateY(-5px);
-        }
-
-        /* Etiquettes "Academy" et "Field" */
-        .card-type {
-            font-family: 'Space Grotesk';
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--text-grey);
-            margin-bottom: 15px;
-            display: block;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding-bottom: 10px;
-        }
-        
-        .sync-card.academy .card-type { color: #a5b4fc; } /* Violet clair pour l'école */
-        .sync-card.field .card-type { color: #86efac; }   /* Vert clair pour l'entreprise */
-
-        .header-mini {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .logo-mini {
-            width: 40px; height: 40px;
-            background: white;
-            border-radius: 6px;
-            padding: 4px;
-            object-fit: contain;
-        }
-
-        .role-title {
-            font-family: 'Space Grotesk';
-            font-size: 1.1rem;
-            color: white;
-            margin: 0;
-        }
-        .role-place {
-            color: var(--text-grey);
-            font-size: 0.85rem;
-        }
-
-        .desc-mini {
-            font-size: 0.9rem;
-            color: var(--text-grey);
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-        /* Boutons */
-        .btn-mini {
-            display: inline-block;
-            font-size: 0.8rem;
-            text-decoration: none;
-            padding: 6px 12px;
-            border-radius: 4px;
-            transition: 0.2s;
-            cursor: pointer;
-            font-family: 'Space Grotesk';
-            background: transparent;
-        }
-        
-        .btn-diploma { border: 1px solid rgba(255,255,255,0.2); color: white; }
-        .btn-diploma:hover { background: rgba(255,255,255,0.1); }
-
-        .btn-info { border: 1px solid var(--accent-blue); color: var(--accent-blue); background: rgba(56, 189, 248, 0.05); }
-        .btn-info:hover { background: var(--accent-blue); color: #000; }
-
-        /* --- FOUNDATION SECTION (BAC & BREVET) --- */
-        .foundation-section {
-            margin-top: 80px;      
-            margin-bottom: 40px;
-            text-align: center;
-            position: relative;
-        }
-
-        .foundation-grid {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .foundation-card {
-            background: rgba(30, 41, 59, 0.3);
-            border: 1px solid var(--border-light);
-            border-radius: 8px;
-            padding: 25px 30px;
-            width: 320px;
-            text-align: left;
-            transition: 0.3s;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .foundation-card:hover {
-            background: var(--card-dark);
-            border-color: var(--text-grey);
-            transform: translateY(-5px);
-        }
-
-        .foundation-card::after {
-            content: '';
-            position: absolute;
-            left: 0; top: 0; bottom: 0;
-            width: 3px;
-            background: var(--success-green);
-            border-top-left-radius: 8px;
-            border-bottom-left-radius: 8px;
-        }
-
-        .foundation-year {
-            font-family: 'Space Grotesk';
-            color: var(--text-grey);
-            font-size: 0.8rem;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        .foundation-title {
-            font-family: 'Space Grotesk';
-            font-size: 1.1rem;
-            color: white;
-            margin: 0 0 5px 0;
-        }
-
-        .foundation-school {
-            font-size: 0.85rem;
-            color: var(--accent-blue);
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .btn-foundation {
-            margin-top: auto;
-            align-self: flex-start;
-            font-family: 'Space Grotesk';
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            text-decoration: none;
-            color: var(--text-grey);
-            border: 1px solid var(--border-light);
-            padding: 8px 12px;
-            border-radius: 4px;
-            transition: 0.2s;
-            cursor: pointer;
-            background: transparent;
-        }
-
-        .btn-foundation:hover {
-            border-color: var(--success-green);
-            color: var(--success-green);
-            background: rgba(16, 185, 129, 0.05);
-        }
-
-        /* --- MODAL (Pop-up GÉNÉRAL) --- */
-        .modal-overlay {
-            display: none; position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.95);
-            z-index: 1000; justify-content: center; align-items: center;
-        }
-        
-        .modal-content {
-            background: var(--card-dark);
-            border: 1px solid var(--accent-blue);
-            padding: 40px; max-width: 600px; width: 90%;
-            border-radius: 12px; position: relative;
-        }
-        
-        /* Modale SPÉCIALE pour le PDF (plus grande) */
-        .modal-content.pdf-viewer {
-            max-width: 1000px;
-            width: 90%;
-            height: 90vh; /* Prend 90% de la hauteur de l'écran */
-            padding: 40px 10px 10px 10px; /* Padding haut pour la croix */
-            display: flex;
-            flex-direction: column;
-        }
-
-        .close-modal {
-            position: absolute; top: 10px; right: 20px; font-size: 2.5rem;
-            color: var(--text-grey); cursor: pointer; z-index: 10;
-        }
-        .close-modal:hover { color: var(--accent-blue); }
-
-        .modal-title {
-            font-family: 'Space Grotesk'; color: white; margin-top: 0;
-            border-bottom: 1px solid var(--border-light); padding-bottom: 15px;
-        }
-        .task-list { padding-left: 20px; color: var(--text-grey); line-height: 1.6; }
-        .task-list li { margin-bottom: 10px; }
-
-        /* Style pour l'iframe PDF */
-        #pdf-frame {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 8px;
-            background: #fff; /* Fond blanc pour le PDF */
-        }
+        .log-card h4 { margin-bottom: 5px; font-size: 1.1rem; }
+        .log-sub { color: var(--text-grey); font-size: 0.85rem; margin-bottom: 15px; display: block; }
+        .log-desc { font-size: 0.9rem; color: #cbd5e1; line-height: 1.5; }
 
         @media (max-width: 900px) {
-            .dual-timeline-section::before { display: none; }
-            .sync-container { grid-template-columns: 1fr; gap: 20px; }
-            .sync-icon { transform: rotate(90deg); }
+            .profile-container, .dual-card-container { grid-template-columns: 1fr; }
+            .timeline-log { padding-left: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <nav class="top-nav">
-        <a href="index.html" class="nav-brand">Valentin Bizet</a>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html" class="active">About</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+    <nav class="system-bar">
+        <div class="sys-id"><span class="indicator blink"></span> SYSTEM: ONLINE</div>
+        <div class="sys-nav">
+            <a href="index.html" class="sys-link">Home</a>
+            <a href="about.html" class="sys-link active">Profile</a>
+            <a href="projects.html" class="sys-link">Architectures</a>
+            <a href="contact.html" class="sys-link">Contact</a>
+        </div>
     </nav>
 
-    <div class="content-wrapper">
-        <div class="container-wide">
+    <div class="container">
+        
+        <div class="section-header">
+            <span class="badge">PERSONNEL FILE</span>
+            <h1>Operator Profile</h1>
+        </div>
 
-            <div class="section-header">
-                <span class="badge">SYSTEM: OPERATIONAL</span>
-                <h1>ACADEMY PROFILE</h1>
-                <p style="color: var(--text-grey);">Parallel processing: Combining advanced theory with field operations.</p>
-            </div>
-
-            <div class="profile-layout">
-                <div class="profile-bio-card">
-                    <h3 class="bio-title">Driver Profile</h3>
-                    <p><strong>About:</strong><br>Currently studying for a Master's degree in Cybersecurity (CSB.School) and working at EVICYS on a work-study program, after completing a Bachelor's degree in RPI at ISITECH. With significant experience at Continental, I am familiar with the requirements of the automotive sector.</p>
-                    <p><strong>Passion & Expertise:</strong><br>I combine technical expertise in systems security with a burning passion for motorsport.</p>
-                    <p><strong>Goal:</strong><br>To contribute to the protection of critical IT infrastructure, embedded systems, and strategic data in high-level motorsports (F1, WEC, Formula E).</p>
-
-                    <a href="credentials.html" class="btn-credentials">
-                        <span style="font-size: 1.2rem; margin-right:10px;">★</span> View Credentials & Certifications
-                    </a>
+        <div class="profile-container">
+            <div class="tech-card" style="border-left: 3px solid var(--accent-primary);">
+                <div class="bio-header">
+                    <h2>Valentin Bizet</h2>
+                    <span class="bio-role">Master Cybersecurity // Field Technician</span>
                 </div>
-
-                <div class="profile-stats-grid">
-                    <div class="stat-card"> <span class="stat-label">Base Location</span> <span class="stat-value">LYON, FR</span> </div>
-                    <div class="stat-card"> <span class="stat-label">Current Status</span> <span class="stat-value highlight">IN TRAINING</span> </div>
-                    <div class="stat-card"> <span class="stat-label">Languages</span> <span class="stat-value">FR / EN</span> </div>
-                    <div class="stat-card full-width">
-                        <span class="stat-label">Mobility</span>
-                        <ul class="mobility-list">
-                            <li>Driving License (Permis B)</li>
-                            <li>Personal Vehicle Available</li>
-                            <li>International Mobility</li>
-                        </ul>
-                    </div>
+                <p style="line-height: 1.7; color: var(--text-grey);">
+                    Currently deployed at <strong>EVICYS</strong> while completing a Master's degree at <strong>CSB School</strong>. My background combines rigorous academic training with hands-on experience in industrial-grade environments (Continental).
+                    <br><br>
+                    I specialize in bridging the gap between theoretical security models and the reality of operational constraints (uptime, legacy systems, latency). My goal is to secure critical infrastructures without compromising performance.
+                </p>
+                <div style="margin-top: 30px;">
+                    <a href="credentials.html" class="btn-primary">View Clearances & Certs</a>
                 </div>
             </div>
 
-            <div style="text-align: center; margin: 80px 0;">
-                <span class="badge">DUAL-CHANNEL CHRONOLOGY</span>
-            </div>
-
-            <div class="dual-timeline-section">
-
-                <div class="time-block">
-                    <div class="date-badge">OCT. 2025 - PRESENT</div>
-                    
-                    <div class="sync-container">
-                        <div class="sync-card academy">
-                            <span class="card-type">// ACADEMIC SOURCE</span>
-                            <div class="header-mini">
-                                <img src="logos/logo-csb.png" alt="CSB" class="logo-mini">
-                                <div>
-                                    <h4 class="role-title">Master Cybersecurity</h4>
-                                    <span class="role-place">CSB.SCHOOL, Lyon</span>
-                                </div>
-                            </div>
-                            <p class="desc-mini">Expert in cybersecurity solutions development</p>
-                            <button onclick="openPdf('docs')" class="btn-mini btn-diploma">DIPLOMA IS IN PROGRESS ...</button>
-                        </div>
-
-                        <div class="sync-icon">⇄</div>
-
-                        <div class="sync-card field">
-                            <span class="card-type">// FIELD DEPLOYMENT</span>
-                            <div class="header-mini">
-                                <img src="logos/logo-evicys.png" alt="Company" class="logo-mini">
-                                <div>
-                                    <h4 class="role-title">Cybersecurity Apprentice</h4>
-                                    <span class="role-place">EVICYS, Lyon</span>
-                                </div>
-                            </div>
-                            <p class="desc-mini">Part-time CISO</p>
-                            <button onclick="openModal('modal-company2')" class="btn-mini btn-info">+ Mission Details</button>
-                        </div>
-                    </div>
+            <div class="kpi-grid">
+                <div class="kpi-card"><span class="kpi-label">Base Location</span><span class="kpi-value">Lyon, FR</span></div>
+                <div class="kpi-card"><span class="kpi-label">Availability</span><span class="kpi-value" style="color:var(--status-success)">Active</span></div>
+                <div class="kpi-card"><span class="kpi-label">Languages</span><span class="kpi-value">FR / EN</span></div>
+                <div class="kpi-card"><span class="kpi-label">Mobility</span><span class="kpi-value">Global</span></div>
+                <div class="kpi-card" style="grid-column: span 2;">
+                    <span class="kpi-label">Core Focus</span>
+                    <span class="kpi-value" style="font-size: 0.9rem;">OT Security, NetSec, Compliance</span>
                 </div>
-
-                <div class="time-block">
-                    <div class="date-badge">SEPT. 2022 - SEPT. 2025</div>
-                    
-                    <div class="sync-container">
-                        <div class="sync-card academy">
-                            <span class="card-type">// ACADEMIC SOURCE</span>
-                            <div class="header-mini">
-                                <img src="logos/logo-isitech.png" alt="School" class="logo-mini">
-                                <div>
-                                    <h4 class="role-title">Bachelor IT Project Manager</h4>
-                                    <span class="role-place">ISITECH, Lyon</span>
-                                </div>
-                            </div>
-                            <p class="desc-mini">Systems and networks specialties</p>
-                            <button onclick="openPdf('credentials/Baccalauréat Mathématiques-Physiques:Chimies.pdf')" class="btn-mini btn-diploma">DIPLOMA</button>
-                        </div>
-
-                        <div class="sync-icon">⇄</div>
-
-                        <div class="sync-card field">
-                            <span class="card-type">// FIELD DEPLOYMENT</span>
-                            <div class="header-mini">
-                                <img src="logos/logo-conti.png" alt="Lheritier" class="logo-mini">
-                                <div>
-                                    <h4 class="role-title">Support Technician</h4>
-                                    <span class="role-place">CONTINENTAL, Lyon</span>
-                                </div>
-                            </div>
-                            <p class="desc-mini">Support L1/L2, infrastructure migration, and workstation deployment.</p>
-                            <button onclick="openModal('modal-lheritier')" class="btn-mini btn-info">+ Mission Details</button>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-            <div class="foundation-section">
-                <span class="badge" style="margin-bottom: 30px; opacity: 0.7;">SYSTEM INITIALIZATION</span>
+        </div>
+
+        <h3 style="border-bottom: 1px solid var(--border-tech); padding-bottom: 15px; margin-bottom: 40px;">CHRONOLOGY LOGS</h3>
+
+        <div class="timeline-log">
+            
+            <div class="log-entry">
+                <div class="log-marker"></div>
+                <span class="log-date">2025 - PRESENT</span>
                 
-                <div class="foundation-grid">
-                    
-                    <div class="foundation-card">
-                        <div>
-                            <span class="foundation-year">2022</span>
-                            <h4 class="foundation-title">General High School Diploma</h4>
-                            <span class="foundation-school">Saint Charles High School, Lyon</span>
-                        </div>
-                        <button onclick="openPdf('credentials/Baccalauréat Mathématiques-Physiques:Chimies.pdf')" class="btn-foundation">DIPLOMA</button>
+                <div class="dual-card-container">
+                    <div class="log-card">
+                        <span class="badge" style="border-color: var(--accent-primary); color: var(--accent-primary);">ACADEMIC</span>
+                        <h4>Master Cybersecurity</h4>
+                        <span class="log-sub">CSB.SCHOOL, Lyon</span>
+                        <p class="log-desc">Advanced Cryptography, Governance (ISO 27001), SOC Management.</p>
+                        <button onclick="openPdf('docs/diploma-csb.pdf')" class="btn-primary" style="font-size: 0.7rem; padding: 5px 10px; margin-top: 10px;">Status PDF</button>
                     </div>
-
-                    <div class="foundation-card">
-                        <div>
-                            <span class="foundation-year">2019</span>
-                            <h4 class="foundation-title">National Diploma</h4>
-                            <span class="foundation-school">Saint Charles Middle School, Lyon</span>
-                        </div>
-                        <button onclick="openPdf('credentials/DNB.pdf')" class="btn-foundation">DIPLOMA</button>
+                    <div class="log-card">
+                        <span class="badge" style="border-color: var(--status-success); color: var(--status-success);">FIELD OPS</span>
+                        <h4>Cybersecurity Apprentice</h4>
+                        <span class="log-sub">EVICYS, Lyon</span>
+                        <p class="log-desc">Part-time CISO duties. Managing SMB client security postures.</p>
+                        <button onclick="openModal('modal-evicys')" class="btn-primary" style="font-size: 0.7rem; padding: 5px 10px; margin-top: 10px;">View Logs</button>
                     </div>
+                </div>
+            </div>
 
+            <div class="log-entry">
+                <div class="log-marker"></div>
+                <span class="log-date">2022 - 2025</span>
+                
+                <div class="dual-card-container">
+                    <div class="log-card">
+                        <span class="badge" style="border-color: var(--accent-primary); color: var(--accent-primary);">ACADEMIC</span>
+                        <h4>Bachelor IT Project Manager</h4>
+                        <span class="log-sub">ISITECH, Lyon</span>
+                        <p class="log-desc">Systems and Networks specialties.</p>
+                        <button onclick="openPdf('docs/diploma-bts.pdf')" class="btn-primary" style="font-size: 0.7rem; padding: 5px 10px; margin-top: 10px;">Status PDF</button>
+                    </div>
+                    <div class="log-card">
+                        <span class="badge" style="border-color: var(--status-success); color: var(--status-success);">FIELD OPS</span>
+                        <h4>Support Technician</h4>
+                        <span class="log-sub">CONTINENTAL</span>
+                        <p class="log-desc">Migration of 270 workstations. Azure Cloud migration. TISAX Audit prep.</p>
+                        <button onclick="openModal('modal-conti')" class="btn-primary" style="font-size: 0.7rem; padding: 5px 10px; margin-top: 10px;">View Logs</button>
+                    </div>
                 </div>
             </div>
 
         </div>
+
     </div>
 
-    <div id="modal-pdf-viewer" class="modal-overlay">
-        <div class="modal-content pdf-viewer">
-            <span class="close-modal" onclick="closeModal('modal-pdf-viewer')">&times;</span>
-            
-            <iframe id="pdf-frame" src="" type="application/pdf"></iframe>
-            
-            <p style="text-align: center; margin-top: 10px; color: var(--text-grey); font-size: 0.8rem;">
-                Document loaded securely. External saving options disabled.
-            </p>
-        </div>
-    </div>
-
-    <div id="modal-lheritier" class="modal-overlay">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('modal-lheritier')">&times;</span>
-            <h2 class="modal-title">Mission Details: CONTINENTAL</h2>
-            <ul class="task-list">
-                <li>Infrastructure & Cloud: Oversaw the migration of 270 PCs to Windows 11. Migrated a local file server to AZURE Cloud.</li>
-                <li>Networks & Security: Renewed the entire Wi-Fi infrastructure (CISCO) and integrated network equipment into racks. Implementation of a backup solution (Veeam) and active participation in the TISAX audit and Pentests.</li>
-                <li>User Services: Level 2 user support and drafting of technical procedures (documentation, processes).</li>
+    <div id="modal-conti" class="modal-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:1000; justify-content:center; align-items:center;">
+        <div class="tech-card" style="max-width:600px; width:90%;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
+                <h3>Mission: CONTINENTAL</h3>
+                <span style="cursor:pointer; font-size:1.5rem;" onclick="closeModal('modal-conti')">&times;</span>
+            </div>
+            <ul style="color:var(--text-grey); line-height:1.6; padding-left:20px;">
+                <li>Infrastructure & Cloud: Oversaw the migration of 270 PCs to Windows 11.</li>
+                <li>Networks: Renewed Wi-Fi infrastructure (CISCO).</li>
+                <li>Audit: Active participation in the TISAX audit (Automotive Standard).</li>
             </ul>
         </div>
     </div>
-
-    <div id="modal-company2" class="modal-overlay">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('modal-company2')">&times;</span>
-            <h2 class="modal-title">Mission Details: EVICYS</h2>
-            <ul class="task-list">
-                <li>Loading...</li>
-                <li>Loading...</li>
-            </ul>
+    
+    <div id="modal-pdf-viewer" class="modal-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:1000; justify-content:center; align-items:center;">
+        <div class="tech-card" style="width:90%; height:90vh; display:flex; flex-direction:column;">
+            <span style="align-self:flex-end; cursor:pointer; font-size:2rem; margin-bottom:10px;" onclick="closeModal('modal-pdf-viewer')">&times;</span>
+            <iframe id="pdf-frame" src="" style="width:100%; height:100%; border:none; background:white;"></iframe>
         </div>
     </div>
 
     <script>
-        // Fonction pour ouvrir les modales de texte
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = 'flex';
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { 
+            document.getElementById(id).style.display = 'none'; 
+            if(id === 'modal-pdf-viewer') document.getElementById('pdf-frame').src = "";
         }
-
-        // Fonction SPÉCIALE pour ouvrir le PDF
-        function openPdf(fileUrl) {
-            const modal = document.getElementById('modal-pdf-viewer');
-            const iframe = document.getElementById('pdf-frame');
-            
-            // On ajoute #toolbar=0&navpanes=0&scrollbar=0 pour cacher les menus du PDF
-            iframe.src = fileUrl + "#toolbar=0&navpanes=0&scrollbar=0";
-            
-            modal.style.display = 'flex';
-        }
-
-        // Fonction pour fermer n'importe quelle modale
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-            
-            // Si c'est le PDF, on vide la source pour arrêter le chargement
-            if(modalId === 'modal-pdf-viewer') {
-                document.getElementById('pdf-frame').src = "";
-            }
-        }
-
-        // Fermer au clic extérieur
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal-overlay')) {
-                event.target.style.display = 'none';
-                // Si c'est le PDF qu'on ferme en cliquant dehors
-                if(event.target.id === 'modal-pdf-viewer') {
-                    document.getElementById('pdf-frame').src = "";
-                }
-            }
+        function openPdf(url) {
+            document.getElementById('pdf-frame').src = url + "#toolbar=0";
+            document.getElementById('modal-pdf-viewer').style.display = 'flex';
         }
     </script>
-
 </body>
 </html>

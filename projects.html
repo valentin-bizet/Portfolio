@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architectures - Valentin Bizet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .project-card { margin-bottom: 80px; overflow: hidden; }
+        
+        .project-header-bar {
+            background: #1a1c20;
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border-tech);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .prj-id { font-family: 'Space Grotesk'; font-weight: 700; color: var(--text-grey); }
+        .prj-title { font-size: 1.5rem; margin: 0; color: var(--text-white); }
+        
+        .project-grid { display: grid; grid-template-columns: 1.2fr 1fr; border-top: 1px solid var(--border-tech); }
+        .col-content { padding: 40px; border-right: 1px solid var(--border-tech); }
+        .col-visuals { background: #16181b; padding: 40px; display: flex; flex-direction: column; gap: 30px; }
+
+        .tech-tag {
+            font-size: 0.75rem; background: rgba(59, 130, 246, 0.1); 
+            color: var(--accent-primary); padding: 5px 10px; border-radius: 2px;
+            border: 1px solid rgba(59, 130, 246, 0.2); font-family: 'Space Grotesk';
+        }
+
+        /* Diagramme Architecture */
+        .arch-diagram {
+            border: 1px dashed var(--text-grey); padding: 20px; border-radius: 4px;
+            text-align: center; position: relative; background: rgba(0,0,0,0.2);
+        }
+        .flow-nodes { display: flex; justify-content: space-between; align-items: center; }
+        .node { background: var(--card-dark); border: 1px solid var(--accent-primary); padding: 10px; border-radius: 4px; font-size: 0.8rem; color: white; width: 80px; z-index: 2; }
+        .line { flex: 1; height: 2px; background: var(--text-grey); position: relative; margin: 0 5px; }
+
+        @media (max-width: 900px) { .project-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <nav class="system-bar">
+        <div class="sys-id"><span class="indicator blink"></span> SYSTEM: ONLINE</div>
+        <div class="sys-nav">
+            <a href="index.html" class="sys-link">Home</a>
+            <a href="about.html" class="sys-link">Profile</a>
+            <a href="projects.html" class="sys-link active">Architectures</a>
+            <a href="contact.html" class="sys-link">Contact</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="section-header">
+            <span class="badge">SYSTEM LOGS</span>
+            <h1>Deployed Architectures</h1>
+            <p style="color: var(--text-grey);">Engineering case studies on Resilience, Security, and Observability.</p>
+        </div>
+
+        <article class="tech-card project-card" style="padding: 0;">
+            <div class="project-header-bar">
+                <div>
+                    <h2 class="prj-title">Secure IoT Data Pipeline</h2>
+                    <div style="display:flex; gap:10px; margin-top:10px;">
+                        <span class="tech-tag">MQTT</span>
+                        <span class="tech-tag">mTLS / PKI</span>
+                        <span class="tech-tag">Docker</span>
+                    </div>
+                </div>
+                <span class="prj-id">REF: IOT-SEC-01</span>
+            </div>
+
+            <div class="project-grid">
+                <div class="col-content">
+                    <h3>Operational Context</h3>
+                    <p style="color: var(--text-grey); line-height: 1.6;">
+                        In critical industries (Energy, Automotive, Pharma), sensor data integrity is non-negotiable. 
+                        The objective was to design a <strong>Zero-Trust telemetry pipeline</strong> capable of transmitting high-frequency data from field assets to a control center, ensuring no spoofing (Integrity) or eavesdropping (Confidentiality).
+                    </p>
+                    
+                    <h3>Technical Implementation</h3>
+                    <ul style="color: var(--text-grey); line-height: 1.6; padding-left: 20px;">
+                        <li><strong>Transport:</strong> Mosquitto MQTT Broker (Lightweight, Low Latency).</li>
+                        <li><strong>Security:</strong> Mutual TLS (mTLS). Both the Sensor (Client) and Broker (Server) authenticate via a private internal CA.</li>
+                        <li><strong>Observability:</strong> TIG Stack (Telegraf, InfluxDB, Grafana) for real-time monitoring.</li>
+                    </ul>
+
+                    <div style="margin-top: 30px; padding: 15px; background: rgba(245, 158, 11, 0.05); border: 1px solid var(--status-warning); border-radius: 4px;">
+                        <strong style="color: var(--status-warning); font-size: 0.85rem; display:block; margin-bottom:5px;">⚠ COMPLIANCE & GOVERNANCE</strong>
+                        <p style="font-size: 0.85rem; margin: 0; color: var(--text-grey);">
+                            Implemented strict PKI lifecycle management (Offline Root CA). 
+                            Role-Based Access Control (RBAC) enforced on dashboard visualization.
+                        </p>
+                    </div>
+
+                    <a href="https://github.com/ton-pseudo/repo" class="btn-primary" style="margin-top: 30px; width: 100%;">View Infrastructure Code</a>
+                </div>
+
+                <div class="col-visuals">
+                    <div class="arch-diagram">
+                        <span style="display:block; font-size:0.7rem; color:var(--text-grey); margin-bottom:15px; text-transform:uppercase;">Data Flow Diagram</span>
+                        <div class="flow-nodes">
+                            <div class="node">SENSOR<br>(Asset)</div>
+                            <div class="line"></div>
+                            <div class="node">BROKER<br>(Gateway)</div>
+                            <div class="line"></div>
+                            <div class="node">HMI<br>(Grafana)</div>
+                        </div>
+                    </div>
+
+                    <div style="background:#0d1117; padding:15px; border-radius:4px; font-family:'Courier New'; font-size:0.75rem; color:#e6edf3; border:1px solid rgba(255,255,255,0.1);">
+                        <div style="border-bottom:1px solid #30363d; padding-bottom:5px; margin-bottom:10px; color:var(--text-grey);">docker-compose.yml</div>
+services:
+  broker:
+    image: eclipse-mosquitto
+    volumes:
+      - ./certs:/mosquitto/certs:ro
+    ports:
+      - "8883:8883" # TLS Port
+                    </div>
+
+                    <div style="border:1px solid var(--border-tech); border-radius:4px; overflow:hidden; position:relative;">
+                        <img src="images/grafana-preview.png" alt="Dashboard" style="width:100%; display:block; opacity:0.8;">
+                        <div style="position:absolute; bottom:0; width:100%; background:rgba(0,0,0,0.8); color:white; font-size:0.7rem; padding:5px; text-align:center;">
+                            LIVE MONITORING DASHBOARD
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

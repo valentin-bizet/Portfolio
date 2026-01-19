@@ -3,343 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentin BIZET - Trackside Engineer</title>
+    <title>Valentin BIZET - Systems & Reliability Engineer</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     
     <style>
-        /* --- 1. DESIGN SYSTEM --- */
-        :root {
-            --bg-dark: #0f172a;       /* Fond principal */
-            --card-dark: #1e293b;     /* Fond des cartes */
-            --text-white: #f8fafc;
-            --text-grey: #94a3b8;
-            --accent-blue: #38bdf8;   /* Cyan électrique */
-            --accent-glow: rgba(56, 189, 248, 0.5);
-        }
-
-        * { box-sizing: border-box; }
-
-        body {
-            background-color: var(--bg-dark);
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            color: var(--text-white);
-            overflow-x: hidden;
-        }
-
-        /* --- 2. TOP NAVIGATION BAR --- */
-        .top-nav {
-            position: absolute; /* Superposé à l'image */
-            top: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 30px 50px;
-            z-index: 100;
-        }
-
-        .nav-brand {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: white;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 40px;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-links a {
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-blue);
-        }
-
-        /* --- 3. HERO SECTION (F1 Background) --- */
-        .hero-container {
-            height: 85vh; /* Hauteur écran */
+        .hero-section {
+            min-height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            position: relative;
-            padding: 20px;
-            
-            /* IMAGE DE FOND */
-            background-image: url('images/hero-bg.png'); 
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* FILTRE SOMBRE */
-        .hero-container::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 1));
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-        }
-
-        .badge {
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--accent-blue);
-            padding: 8px 16px;
-            border-radius: 4px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            display: inline-block;
-            margin-bottom: 25px;
-        }
-
-        h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(3rem, 6vw, 5rem);
-            margin: 0;
-            text-transform: uppercase;
-            color: #ffffff;
-            text-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
-        }
-
-        .subtitle {
-            color: #cbd5e1;
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin-top: 25px;
-            font-weight: 300;
-        }
-
-        /* --- 4. DASHBOARD SECTION (Cartes sans Images) --- */
-        .nav-section {
-            padding: 50px 20px 100px 20px; /* Un peu d'espace en bas */
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 5;
-            margin-top: -100px; /* Remonte légèrement sur le Hero pour l'effet layer */
+            padding: 40px 20px;
         }
 
         .dashboard-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            gap: 20px;
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 60px;
         }
 
-        /* STYLE DES CARTES TECH */
-        .tech-card {
-            background: rgba(30, 41, 59, 0.95); /* Semi-transparent */
-            backdrop-filter: blur(10px);        /* Effet de flou arrière-plan */
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            padding: 50px 40px;
-            text-decoration: none;
-            position: relative;
-            overflow: hidden; /* Important pour contenir le gros chiffre */
-            transition: all 0.4s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: 300px; /* Hauteur garantie sans image */
-        }
-
-        /* Effet Hover : Bordure bleue et léger soulèvement */
-        .tech-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-blue);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4), 0 0 20px rgba(56, 189, 248, 0.1);
-        }
-
-        /* Le gros numéro en fond (01 / 02) */
-        .bg-number {
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 10rem;
-            font-weight: 700;
-            color: rgba(255,255,255,0.03); /* Très subtil */
-            transition: color 0.4s;
-            z-index: 0;
-        }
-
-        .tech-card:hover .bg-number {
-            color: rgba(56, 189, 248, 0.1); /* S'illumine un peu au survol */
-        }
-
-        /* Contenu de la carte */
-        .card-content {
-            position: relative;
-            z-index: 1; /* Au dessus du numéro */
-        }
-
-        .card-tag {
-            font-family: 'Space Grotesk';
-            color: var(--accent-blue);
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 15px;
-        }
-
-        .card-title {
-            font-family: 'Space Grotesk';
-            font-size: 2.5rem;
-            color: white;
-            margin: 0 0 20px 0;
-            text-transform: uppercase;
-        }
-
-        .card-desc {
-            color: var(--text-grey);
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            max-width: 90%;
-        }
-
-        /* Petite flèche tech */
-        .tech-arrow {
-            display: inline-flex;
-            align-items: center;
-            font-family: 'Space Grotesk';
-            color: white;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: gap 0.3s;
-        }
-        
-        .tech-arrow span {
+        .hero-subtitle {
             font-size: 1.2rem;
-            margin-left: 10px;
-        }
-
-        .tech-card:hover .tech-arrow {
-            color: var(--accent-blue);
-            gap: 10px; /* Écarte la flèche du texte au survol */
-        }
-
-        /* --- 5. FOOTER --- */
-        .footer-cta {
-            text-align: center;
-            padding: 80px 20px;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-grey);
+            max-width: 700px;
+            margin-top: 20px;
+            line-height: 1.6;
         }
         
-        .btn-outline {
-            display: inline-block;
-            padding: 15px 40px;
-            border: 1px solid var(--text-grey);
-            color: white;
-            text-decoration: none;
-            border-radius: 4px; /* Coins carrés pour aspect tech */
-            transition: 0.3s;
-            margin-top: 30px;
+        .card-header {
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
             font-family: 'Space Grotesk';
+            font-size: 0.8rem;
+            color: var(--text-grey);
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        .btn-outline:hover {
-            border-color: var(--accent-blue);
-            color: var(--accent-blue);
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+        /* Indicateur d'état sur les cartes */
+        .status-dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--status-success); display: inline-block;
         }
 
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .top-nav {
-                padding: 20px;
-                flex-direction: column;
-                gap: 20px;
-            }
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-            .nav-section {
-                margin-top: -50px;
-            }
+        @media (max-width: 900px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <nav class="top-nav">
-        <a href="index.html" class="nav-brand">Valentin Bizet</a>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+    <nav class="system-bar">
+        <div class="sys-id">
+            <span class="indicator blink"></span> SYSTEM: ONLINE
+        </div>
+        <div class="sys-nav">
+            <a href="about.html" class="sys-link">Profile</a>
+            <a href="projects.html" class="sys-link">Architectures</a>
+            <a href="credentials.html" class="sys-link">Compliance</a>
+            <a href="contact.html" class="sys-link">Contact</a>
+        </div>
     </nav>
 
-    <header class="hero-container">
-        <div class="hero-content">
-            <span class="badge">SYSTEM ONLINE</span>
-            <h1>Valentin BIZET</h1>
-            <p class="subtitle">Where code meets the circuit. <br> Passionate about pushing IT limits to the finish line.</p>
-        </div>
-    </header>
+    <section class="hero-section">
+        <span class="badge">SYSTEMS & RELIABILITY ENGINEER</span>
+        <h1>Bridging IT Security &<br>Operational Technology (OT)</h1>
+        <p class="hero-subtitle">Specialized in designing resilient infrastructures, securing critical data pipelines, and ensuring compliance in high-availability environments (Industry, Finance, Health).</p>
 
-    <section class="nav-section">
         <div class="dashboard-grid">
             
-            <a href="about.html" class="tech-card">
-                <div class="bg-number">01</div>
-                
-                <div class="card-content">
-                    <span class="card-tag">// DRIVER STATUS</span>
-                    <h2 class="card-title">Profile</h2>
-                    <p class="card-desc">From the starting grid to the finish line: my journey in high-performance IT. Decoding the engineer behind the machine.</p>
-                    <div class="tech-arrow">Initialize <span>→</span></div>
+            <a href="about.html" class="tech-card" style="text-decoration: none; border-left: 3px solid var(--accent-primary);">
+                <div class="card-header">
+                    <span>MODULE: PROFILE</span>
+                    <span>STATUS: <span class="status-dot"></span> ACTIVE</span>
+                </div>
+                <h2 style="color: white; font-size: 1.5rem;">Operator File</h2>
+                <p style="color: var(--text-grey); font-size: 0.9rem; line-height: 1.5;">
+                    Dual competency profile: Advanced Cybersecurity Theory combined with Field Operations experience.
+                </p>
+                <div style="margin-top: 20px; color: var(--accent-primary); font-family: 'Space Grotesk'; font-size: 0.9rem;">
+                    >> Access Personnel File
                 </div>
             </a>
 
-            <a href="projects.html" class="tech-card">
-                <div class="bg-number">02</div>
-                
-                <div class="card-content">
-                    <span class="card-tag">// TELEMETRY DATA</span>
-                    <h2 class="card-title">Projects</h2>
-                    <p class="card-desc">Lap records in logic. High-speed solutions for trackside challenges and deployed systems.</p>
-                    <div class="tech-arrow">View Schematics <span>→</span></div>
+            <a href="projects.html" class="tech-card" style="text-decoration: none; border-left: 3px solid var(--status-warning);">
+                <div class="card-header">
+                    <span>MODULE: PROJECTS</span>
+                    <span>LOGS: 3 UPDATED</span>
+                </div>
+                <h2 style="color: white; font-size: 1.5rem;">Deployed Architectures</h2>
+                <p style="color: var(--text-grey); font-size: 0.9rem; line-height: 1.5;">
+                    Technical breakdown of secure IoT pipelines, SOC implementations, and infrastructure hardening.
+                </p>
+                <div style="margin-top: 20px; color: var(--status-warning); font-family: 'Space Grotesk'; font-size: 0.9rem;">
+                    >> View System Logs
                 </div>
             </a>
 
         </div>
     </section>
-
-    <footer class="footer-cta">
-        <h2 style="font-family: 'Space Grotesk'; margin-bottom: 10px;">Ready to initiate connection?</h2>
-        <p style="color: var(--text-grey);">Radio check. Let's get on the same frequency.</p>
-        <a href="contact.html" class="btn-outline">Open Channel</a>
-    </footer>
 
 </body>
 </html>
