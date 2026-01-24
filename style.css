@@ -1,156 +1,113 @@
-/* === DESIGN SYSTEM: CRITICAL INFRASTRUCTURE (OT/ICS) === */
+/* === DESIGN SYSTEM: SWISS FINANCE & CORPORATE === */
 :root {
-    /* FOND : Ambiance "Control Room" */
-    --bg-dark: #1e2024;       /* Gris anthracite profond (Matériel industriel) */
-    --card-dark: #25282d;     /* Modules légèrement plus clairs */
-    --grid-line: rgba(255, 255, 255, 0.03); /* Grille de fond */
-
-    /* TEXTE : Lisibilité maximale */
-    --text-white: #e2e8f0;    /* Blanc cassé (reposant) */
-    --text-grey: #94a3b8;     /* Métadonnées */
+    /* PALETTE: Confiance, Clarté, Prestige */
+    --bg-body: #F9FAFB;       /* Gris très pâle (premium) */
+    --bg-card: #FFFFFF;       /* Blanc pur */
+    --bg-section: #F3F4F6;    /* Contraste section */
     
-    /* ACCENTS : Codes couleurs industriels */
-    --accent-primary: #3b82f6; /* Bleu "Engineering" (Confiance, Tech) */
-    --status-success: #10b981; /* Vert "System OK" */
-    --status-warning: #f59e0b; /* Orange "Maintenance/Action" */
-    --status-alert: #ef4444;   /* Rouge "Critical" */
-
-    /* BORDURES & STRUCTURE */
-    --border-tech: 1px solid rgba(255, 255, 255, 0.1);
-    --border-active: 1px solid var(--accent-primary);
+    --text-primary: #0F172A;  /* Navy très sombre (remplace le noir dur) */
+    --text-secondary: #64748B;/* Gris ardoise pour les détails */
+    --text-accent: #0044CC;   /* "International Blue" (Sérieux) */
     
-    /* EFFETS */
-    --shadow-panel: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    --border-subtle: rgba(0, 0, 0, 0.06);
+    --shadow-soft: 0 20px 40px -10px rgba(0, 0, 0, 0.05); /* Ombre diffuse "Apple/Stripe" */
+    
+    /* ANIMATIONS */
+    --ease-premium: cubic-bezier(0.16, 1, 0.3, 1); /* Mouvement fluide et naturel */
 }
 
-* { box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    background-color: var(--bg-dark);
-    /* Effet papier millimétré subtil */
-    background-image: 
-        linear-gradient(var(--grid-line) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-    background-size: 40px 40px;
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    color: var(--text-white);
+    background-color: var(--bg-body);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased; /* Rendu typo net sur Mac */
 }
 
-/* --- SYSTEM BAR (Navigation) --- */
-.system-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-    background: #111316;
-    border-bottom: 2px solid var(--accent-primary);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    font-family: 'Space Grotesk', monospace;
-    font-size: 0.85rem;
-    color: var(--text-grey);
+/* --- TYPOGRAPHIE SUISSE --- */
+h1, h2, h3 { letter-spacing: -0.02em; font-weight: 700; color: var(--text-primary); }
+
+h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; }
+h2 { font-size: 2rem; margin-bottom: 10px; }
+p { color: var(--text-secondary); font-size: 1.05rem; max-width: 700px; }
+
+/* --- NAVIGATION --- */
+.navbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 25px 50px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px); /* Effet verre dépoli */
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    border-bottom: 1px solid var(--border-subtle);
 }
 
-.sys-id {
-    color: var(--text-white);
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+.brand { font-weight: 700; font-size: 1.2rem; letter-spacing: -0.5px; }
 
-.indicator {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    background-color: var(--status-success);
-    border-radius: 50%;
-    box-shadow: 0 0 8px var(--status-success);
+.nav-links a {
+    text-decoration: none; color: var(--text-secondary);
+    margin-left: 30px; font-size: 0.9rem; font-weight: 500;
+    transition: color 0.3s ease;
 }
-.blink { animation: blinking 2s infinite; }
-@keyframes blinking { 0% {opacity: 1;} 50% {opacity: 0.4;} 100% {opacity: 1;} }
+.nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
 
-.sys-nav {
-    display: flex;
-    gap: 30px;
-}
-
-.sys-link {
-    text-decoration: none;
-    color: var(--text-grey);
-    text-transform: uppercase;
-    transition: 0.3s;
-}
-.sys-link:hover, .sys-link.active { color: var(--accent-primary); }
-
-/* --- TYPOGRAPHIE --- */
-h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; margin-top: 0; }
-h1 { font-size: 3rem; text-transform: uppercase; letter-spacing: -1px; }
-
-.badge {
-    font-family: 'Space Grotesk';
-    font-size: 0.75rem;
-    padding: 4px 8px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: var(--accent-primary);
-    border-radius: 2px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: inline-block;
-    margin-bottom: 15px;
-}
-
-/* --- LAYOUT --- */
-.container { max-width: 1200px; margin: 60px auto; padding: 0 20px; }
-.section-header { text-align: center; margin-bottom: 80px; }
-
-/* --- COMPOSANTS UI INDUSTRIELS --- */
-.tech-card {
-    background: var(--card-dark);
-    border: var(--border-tech);
-    border-radius: 2px; /* Coins carrés = Industriel */
-    padding: 30px;
-    position: relative;
-    transition: 0.3s;
-}
-.tech-card:hover {
-    border-color: var(--accent-primary);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
+/* --- LAYOUT & COMPONENTS --- */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.section-spacer { padding: 120px 0; }
 
 .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 25px;
-    background: transparent;
-    border: 1px solid var(--accent-primary);
-    color: var(--accent-primary);
-    font-family: 'Space Grotesk';
-    text-transform: uppercase;
+    display: inline-block;
+    background-color: var(--text-primary);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 6px; /* Pas trop rond */
     text-decoration: none;
     font-weight: 600;
-    transition: 0.3s;
-    cursor: pointer;
-    border-radius: 2px;
+    transition: transform 0.4s var(--ease-premium), box-shadow 0.4s var(--ease-premium);
 }
 .btn-primary:hover {
-    background: var(--accent-primary);
-    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
+/* --- CARTES PREMIUM --- */
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 40px;
+    transition: all 0.5s var(--ease-premium);
+    position: relative; overflow: hidden;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-soft);
+    border-color: rgba(0, 68, 204, 0.1);
+}
+
+/* --- ANIMATIONS "SCROLL REVEAL" --- */
+/* État initial : invisible et légèrement en bas */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s var(--ease-premium), transform 1s var(--ease-premium);
+}
+/* État final : visible et à sa place */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Délais pour l'effet cascade */
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+
 /* --- MEDIA QUERIES --- */
-@media (max-width: 900px) {
-    .system-bar { flex-direction: column; gap: 15px; padding: 15px; }
-    .sys-nav { gap: 15px; font-size: 0.8rem; }
-    h1 { font-size: 2rem; }
+@media (max-width: 768px) {
+    h1 { font-size: 2.5rem; }
+    .navbar { padding: 20px; }
+    .nav-links { display: none; } /* Pour simplifier ici, idéalement menu burger */
 }

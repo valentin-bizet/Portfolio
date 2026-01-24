@@ -2,63 +2,148 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Valentin Bizet</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    
     <style>
-        .contact-form {
-            max-width: 600px; margin: 0 auto;
-            background: var(--card-dark);
-            padding: 40px; border: var(--border-tech);
-            border-top: 3px solid var(--accent-primary);
+        .contact-wrapper {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+            margin-top: 60px;
         }
-        .form-group { margin-bottom: 20px; }
-        .form-label { display: block; margin-bottom: 8px; font-family: 'Space Grotesk'; color: var(--accent-primary); font-size: 0.9rem; }
+        
+        .contact-method { margin-bottom: 30px; }
+        
+        .contact-label { 
+            font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); 
+            text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 10px;
+        }
+        
+        /* --- STYLE DES BOUTONS --- */
+        .contact-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 20px 25px;
+            background: #FFFFFF;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            border-color: var(--text-accent);
+            color: var(--text-accent);
+        }
+
+        .contact-btn .icon {
+            font-size: 1.2rem;
+            opacity: 0.5;
+            transition: 0.3s;
+        }
+        .contact-btn:hover .icon {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        /* Formulaire */
         .form-input {
-            width: 100%; padding: 12px;
-            background: #111316; border: 1px solid var(--border-tech);
-            color: white; font-family: 'Inter';
+            width: 100%; padding: 15px 0; border: none;
+            border-bottom: 1px solid #ddd; background: transparent;
+            font-family: 'Inter'; font-size: 1rem; margin-bottom: 30px;
+            transition: 0.3s;
         }
-        .form-input:focus { outline: none; border-color: var(--accent-primary); }
+        .form-input:focus { outline: none; border-bottom-color: var(--text-primary); }
+        
+        /* Style pour le message de succès (optionnel si géré par JS, mais utile) */
+        button { cursor: pointer; }
+        
+        @media(max-width: 900px) { .contact-wrapper { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <nav class="system-bar">
-        <div class="sys-id"><span class="indicator blink"></span> SYSTEM: ONLINE</div>
-        <div class="sys-nav">
-            <a href="index.html" class="sys-link">Home</a>
-            <a href="contact.html" class="sys-link active">Contact</a>
+    <nav class="navbar">
+        <div class="brand">VALENTIN BIZET</div>
+        <div class="nav-links">
+            <a href="index.html">Overview</a>
+            <a href="about.html">Profile</a>
+            <a href="credentials.html">Qualifications</a>
+            <a href="projects.html">Case Studies</a>
+            <a href="contact.html" class="active">Contact</a>
         </div>
     </nav>
 
-    <div class="container">
-        <div class="section-header">
-            <span class="badge">SECURE CHANNEL</span>
-            <h1>Establish Uplink</h1>
-            <p style="color: var(--text-grey);">Direct communication channel.</p>
-        </div>
+    <section class="section-spacer" style="padding-top: 150px;">
+        <div class="container">
+            
+            <div class="reveal">
+                <h1>Start a Conversation.</h1>
+                <p>Available for opportunities.</p>
+            </div>
 
-        <div class="contact-form">
-            <form action="mailto:ton.email@example.com" method="post" enctype="text/plain">
-                <div class="form-group">
-                    <label class="form-label">IDENTIFICATION (Name)</label>
-                    <input type="text" name="name" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">RETURN ADDRESS (Email)</label>
-                    <input type="email" name="email" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">PAYLOAD (Message)</label>
-                    <textarea name="message" class="form-input" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="btn-primary" style="width:100%;">Transmit Data</button>
-            </form>
-        </div>
-    </div>
+            <div class="contact-wrapper">
+                
+                <div class="reveal delay-100">
+                    
+                    <div class="contact-method">
+                        <span class="contact-label">Email Direct</span>
+                        <a href="mailto:bizetvalentin@icloud.com" class="contact-btn">
+                            <span>bizetvalentin@icloud.com</span>
+                            <span class="icon">↗</span>
+                        </a>
+                    </div>
 
+                    <div class="contact-method">
+                        <span class="contact-label">Professional Network</span>
+                        <a href="https://www.linkedin.com/in/valentin-bizet/" target="_blank" class="contact-btn">
+                            <span>LinkedIn Profile</span>
+                            <span class="icon">↗</span>
+                        </a>
+                    </div>
+
+                    <div class="contact-method" style="margin-top: 40px;">
+                        <span class="contact-label">Base Location</span>
+                        <p style="color: var(--text-primary); font-size: 1.1rem; border-left: 2px solid var(--text-accent); padding-left: 15px;">
+                            Lyon, France<br>
+                            <span style="color: var(--text-secondary); font-size: 0.95rem;">Open to Relocation</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="reveal delay-200" style="background: white; padding: 40px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.06);">
+                    
+                    <form action="https://formspree.io/f/mojebqob" method="POST">
+                        
+                        <label class="contact-label">Your Name</label>
+                        <input type="text" name="name" class="form-input" placeholder="John Doe" required>
+
+                        <label class="contact-label">Email Address</label>
+                        <input type="email" name="email" class="form-input" placeholder="john@company.com" required>
+
+                        <label class="contact-label">Inquiry</label>
+                        <textarea name="message" class="form-input" rows="4" placeholder="How can I help you?" required></textarea>
+
+                        <button type="submit" class="btn-primary" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
