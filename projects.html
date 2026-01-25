@@ -14,6 +14,9 @@
             padding: 40px;
             margin-bottom: 60px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            
+            /* C'EST ICI LA MAGIE POUR L'ANCRE */
+            scroll-margin-top: 120px; /* Empêche le menu de cacher le titre au clic */
         }
 
         .project-card:hover {
@@ -59,10 +62,10 @@
         <div class="brand">VALENTIN BIZET</div>
         <div class="nav-links">
             <a href="index.html">Overview</a>
-            <a href="about.html">Profile</a>
+            <a href="projects.html" class="active">Case Studies</a>
             <a href="credentials.html">Qualifications</a>
-            <a href="projects.html">Case Studies</a>
-            <a href="contact.html" class="active">Contact</a>
+            <a href="about.html">Profile</a>
+            <a href="contact.html">Contact</a>
         </div>
     </nav>
 
@@ -78,7 +81,7 @@
 
             <div style="margin-top: 80px;">
 
-                <div class="reveal delay-100 project-card">
+                <div id="industrial" class="reveal delay-100 project-card">
                     <div class="project-header">
                         <div>
                             <div class="project-title">Industrial Infrastructure Hardening</div>
@@ -109,7 +112,7 @@
                     </div>
                 </div>
 
-                <div class="reveal delay-200 project-card">
+                <div id="soc" class="reveal delay-200 project-card">
                     <div class="project-header">
                         <div>
                             <div class="project-title">SOC Implementation & Threat Detection</div>
@@ -141,7 +144,7 @@
                     </div>
                 </div>
 
-                <div class="reveal delay-200 project-card">
+                <div id="iot" class="reveal delay-200 project-card">
                     <div class="project-header">
                         <div>
                             <div class="project-title">Secure IoT Telemetry Architecture</div>

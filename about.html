@@ -9,15 +9,13 @@
         .profile-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; margin-bottom: 100px; }
         
         /* Photo Pro */
-        .profile-visual {
-            position: relative;
-        }
+        .profile-visual { position: relative; }
         .profile-img {
             width: 100%; height: 500px; object-fit: cover;
-            border-radius: 4px; filter: grayscale(100%); /* Noir et blanc élégant */
+            border-radius: 4px; filter: grayscale(100%);
             transition: filter 0.5s ease;
         }
-        .profile-img:hover { filter: grayscale(0%); } /* Couleur au survol */
+        .profile-img:hover { filter: grayscale(0%); }
 
         /* Timeline Suisse */
         .timeline { border-left: 1px solid var(--border-subtle); padding-left: 40px; margin-top: 40px; }
@@ -36,19 +34,31 @@
             margin-right: 8px; margin-bottom: 8px; font-weight: 500;
         }
 
+        /* --- STYLE DU BADGE "REFERENCES" (Non cliquable) --- */
+        .ref-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #FAFAFA; border: 1px solid #E5E7EB;
+            padding: 6px 12px; border-radius: 20px;
+            color: var(--text-secondary);
+            font-size: 0.75rem; font-weight: 500; margin-top: 15px;
+            cursor: default; /* Curseur normal, pas de main */
+            opacity: 0.8;
+        }
+        .ref-icon { font-size: 0.9rem; }
+
         @media(max-width: 900px) { .profile-grid { grid-template-columns: 1fr; } .profile-img { height: 350px; } }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="brand">VALENTIN BIZET</div>
+        <div class="brand">VALENTIN BIZET.</div>
         <div class="nav-links">
             <a href="index.html">Overview</a>
-            <a href="about.html">Profile</a>
-            <a href="credentials.html">Qualifications</a>
             <a href="projects.html">Case Studies</a>
-            <a href="contact.html" class="active">Contact</a>
+            <a href="credentials.html">Qualifications</a>
+            <a href="about.html" class="active">Profile</a>
+            <a href="contact.html">Contact</a>
         </div>
     </nav>
 
@@ -58,16 +68,16 @@
             <div class="profile-grid">
                 
                 <div class="reveal">
-                    <img src="images/placeholder-portrait.jpg" alt="Valentin Bizet" class="profile-img">
+                    <img src="images/portrait.jpeg" alt="Valentin Bizet" class="profile-img">
                     
                     <div style="margin-top: 40px;">
                         <h3>Core Competencies</h3>
                         <div style="margin-top: 20px;">
-                            <span class="skill-tag">Governance (ISO 27001, SecNumCloud)</span>
+                            <span class="skill-tag">Governance (ISO 27001)</span>
                             <span class="skill-tag">OT Security</span>
                             <span class="skill-tag">Network Architecture</span>
-                            <span class="skill-tag">Risk Analysis (EBIOS RM)</span>
-                            <span class="skill-tag">English (B2)</span>
+                            <span class="skill-tag">Risk Analysis (EBIOS)</span>
+                            <span class="skill-tag">English (C1)</span>
                         </div>
                     </div>
 
@@ -78,11 +88,15 @@
 
                 <div class="reveal delay-100">
                     <span style="color: var(--text-accent); font-weight: 600; letter-spacing: 1px; font-size: 0.85rem;">PROFESSIONAL PROFILE</span>
+                    
                     <h1 style="font-size: 2.5rem; margin-top: 10px;">Securing Critical Assets & Infrastructures.</h1>
+                    
                     <p style="margin-top: 30px; margin-bottom: 30px;">
-                        My approach to cybersecurity is grounded in operational reality. I don't just apply theoretical models; I design systems that remain resilient under pressure.
+                        Bridging the gap between high-level compliance standards and low-level technical realities. I don't just apply theoretical models; I design actionable security postures that withstand real-world pressure.
                         <br><br>
-                        Currently completing a Master's degree in Cybersecurity while acting as a field technician, I bridge the gap between high-level governance strategies and low-level technical implementation.
+                        Currently completing a Master's degree in Cybersecurity alongside hands-on operational duties, I combine strategic vision with engineering precision.
+                        <br><br>
+                        <strong>Objective:</strong> Delivering robust, scalable protection for high-stakes environments and global organizations, ensuring business continuity against evolving threats.
                     </p>
 
                     <h3 style="margin-top: 60px;">Career Track</h3>
@@ -94,21 +108,27 @@
                             <div class="time-role">Master Cybersecurity & Governance</div>
                             <span class="time-place">CSB SCHOOL / EVICYS (Work-study)</span>
                             <p style="font-size: 0.95rem;">
-                                Specialized in GRC (Governance, Risk, Compliance). Handling security postures and ISO alignment.
+                                Specialized in GRC (Governance, Risk, Compliance). Handling SMB security postures and ISO alignment.
                             </p>
+                            <span class="ref-badge">
+                                References available upon request
+                            </span>
                         </div>
 
                         <div class="timeline-item">
                             <span class="time-date">2022 - 2025</span>
-                            <div class="time-role">Bachelor IT Project Manager & Technician</div>
-                            <span class="time-place">ISITECH / CONTINENTAL (Work-study)</span>
+                            <div class="time-role">IT Project Manager & Infrastructure</div>
+                            <span class="time-place">ISITECH / CONTINENTAL</span>
                             <p style="font-size: 0.95rem;">
-                                Managed infrastructure migration for 270+ workstations. Participation in TISAX automotive security audits.
+                                Managed infrastructure migration for 270+ workstations. Active participation in TISAX automotive security audits.
                             </p>
+                            <span class="ref-badge">
+                                References available upon request
+                            </span>
                         </div>
 
                         <div class="timeline-item">
-                            <span class="time-date">2022</span>
+                            <span class="time-date">2019 - 2022</span>
                             <div class="time-role">General Baccalaureate</div>
                             <span class="time-place">LYON</span>
                             <p style="font-size: 0.95rem;">
