@@ -3,25 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>Case Studies - Valentin Bizet</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        .project-section { margin-bottom: 100px; }
-        .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-        .project-image {
-            width: 100%; border-radius: 8px; box-shadow: var(--shadow-soft);
-            background: #f0f0f0; min-height: 300px; object-fit: cover;
+        /* Style spécifique Case Studies */
+        .project-card {
+            background: #FFFFFF;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 60px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .tag { 
-            font-size: 0.75rem; font-weight: 600; text-transform: uppercase; 
-            letter-spacing: 1px; color: var(--text-accent); margin-bottom: 10px; display: block;
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+            border-color: var(--text-accent);
         }
-        .metric-box {
-            display: flex; gap: 30px; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-subtle);
+
+        .project-header {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 20px;
         }
-        .metric h4 { font-size: 1.5rem; margin: 0; }
-        .metric span { font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; }
+
+        .project-title { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 5px; }
+        .project-subtitle { font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; }
+
+        .tag-container { display: flex; gap: 10px; flex-wrap: wrap; }
+        .tech-tag {
+            font-size: 0.75rem; font-weight: 600; background: #F3F4F6; color: var(--text-primary);
+            padding: 4px 10px; border-radius: 4px;
+        }
+        .tag-gov { background: #eef2ff; color: #4338ca; } /* Bleu pour Gouvernance */
+        .tag-sec { background: #fef2f2; color: #b91c1c; } /* Rouge pour Sécu */
+
+        .project-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; margin-top: 30px; }
         
+        .project-label { font-size: 0.85rem; font-weight: 700; color: var(--text-primary); margin-bottom: 5px; display: block; }
+        .project-text { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; }
+
+        .btn-outline {
+            display: inline-block; padding: 10px 20px; border: 1px solid var(--border-subtle);
+            text-decoration: none; color: var(--text-primary); font-size: 0.9rem; font-weight: 500;
+            border-radius: 4px; transition: 0.2s; margin-top: 20px;
+        }
+        .btn-outline:hover { background: var(--text-primary); color: white; border-color: var(--text-primary); }
+
         @media(max-width: 900px) { .project-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -41,47 +69,111 @@
     <section class="section-spacer" style="padding-top: 150px;">
         <div class="container">
             
-            <div class="reveal" style="margin-bottom: 80px; text-align: center;">
-                <h1>Technical Case Studies</h1>
-                <p style="margin: 0 auto;">Engineering solutions applied to security and reliability challenges.</p>
+            <div class="reveal">
+                <h1>Selected Case Studies.</h1>
+                <p style="max-width: 600px; color: var(--text-secondary);">
+                    A selection of projects demonstrating my dual competency in Strategic Governance and Technical Engineering.
+                </p>
             </div>
 
-            <div class="project-section reveal">
-                <div class="project-grid">
-                    <div>
-                        <span class="tag">Secure IoT Architecture</span>
-                        <h2>End-to-End Encrypted Telemetry Pipeline</h2>
-                        <p style="margin-top: 20px;">
-                            <strong>Context:</strong> Critical industries require real-time data monitoring without exposing assets to network threats.<br><br>
-                            <strong>Solution:</strong> Implementation of a Zero-Trust architecture using mTLS authentication for every node. Data is encrypted in transit using TLS 1.3 standards.
-                        </p>
-                        <div class="metric-box">
-                            <div class="metric"><h4>100%</h4><span>Encryption</span></div>
-                            <div class="metric"><h4>&lt; 50ms</h4><span>Latency</span></div>
-                            <div class="metric"><h4>mTLS</h4><span>Auth Protocol</span></div>
+            <div style="margin-top: 80px;">
+
+                <div class="reveal delay-100 project-card">
+                    <div class="project-header">
+                        <div>
+                            <div class="project-title">Industrial Infrastructure Hardening</div>
+                            <span class="project-subtitle">Automotive Sector • Compliance</span>
+                        </div>
+                        <div class="tag-container">
+                            <span class="tech-tag tag-gov">TISAX / ISO 27001</span>
+                            <span class="tech-tag">Network Segmentation</span>
+                            <span class="tech-tag">Active Directory</span>
                         </div>
                     </div>
-                    <img src="images/grafana-preview.png" class="project-image" alt="Dashboard Interface">
-                </div>
-            </div>
-
-            <div class="project-section reveal">
-                <div class="project-grid">
-                    <img src="images/audit-plan.png" class="project-image" style="order: -1;" alt="Audit Structure"> <div>
-                        <span class="tag">Compliance & Governance</span>
-                        <h2>ISO 27001 Readiness Audit</h2>
-                        <p style="margin-top: 20px;">
-                            <strong>Context:</strong> Preparing a corporate infrastructure for external certification.<br><br>
-                            <strong>Solution:</strong> Conducted a full gap analysis, mapped assets, and implemented RBAC (Role-Based Access Control) policies to meet compliance requirements.
-                        </p>
-                        <div class="metric-box">
-                            <div class="metric"><h4>27k1</h4><span>Standard</span></div>
-                            <div class="metric"><h4>RBAC</h4><span>Access Control</span></div>
+                    
+                    <div class="project-grid">
+                        <div>
+                            <span class="project-label">THE CHALLENGE</span>
+                            <p class="project-text">
+                                Migration and security hardening of an industrial infrastructure (270+ nodes) to meet strict TISAX automotive standards. The system required zero downtime during production hours.
+                            </p>
+                        </div>
+                        <div>
+                            <span class="project-label">ENGINEERING & STRATEGY</span>
+                            <ul style="list-style: none; padding: 0; margin-bottom: 20px;">
+                                <li class="project-text">→ <strong>Governance:</strong> Conducted gap analysis against TISAX controls to identify vulnerabilities in the legacy network.</li>
+                                <li class="project-text">→ <strong>Implementation:</strong> Deployed VLAN segmentation to isolate OT (Operational Tech) from IT networks. Hardened Active Directory GPOs.</li>
+                                <li class="project-text">→ <strong>Outcome:</strong> Successful audit validation with compliant security posture and improved availability.</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-            </div>
 
+                <div class="reveal delay-200 project-card">
+                    <div class="project-header">
+                        <div>
+                            <div class="project-title">SOC Implementation & Threat Detection</div>
+                            <span class="project-subtitle">Home Lab • Blue Teaming</span>
+                        </div>
+                        <div class="tag-container">
+                            <span class="tech-tag tag-sec">Wazuh SIEM</span>
+                            <span class="tech-tag tag-sec">MITRE ATT&CK</span>
+                            <span class="tech-tag">Linux / Docker</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-grid">
+                        <div>
+                            <span class="project-label">THE CHALLENGE</span>
+                            <p class="project-text">
+                                Designing a low-cost, scalable Security Operations Center (SOC) stack to detect specific attack vectors (Brute Force, SQL Injection) in real-time.
+                            </p>
+                        </div>
+                        <div>
+                            <span class="project-label">ENGINEERING & STRATEGY</span>
+                            <ul style="list-style: none; padding: 0; margin-bottom: 20px;">
+                                <li class="project-text">→ <strong>Architecture:</strong> Deployment of Wazuh Manager (SIEM) and agents on Linux/Windows targets. Integration with a dashboard (Elastic/Kibana).</li>
+                                <li class="project-text">→ <strong>Scenario:</strong> Simulation of attacks using Kali Linux. Configuration of custom alert rules mapped to the MITRE ATT&CK framework.</li>
+                                <li class="project-text">→ <strong>Outcome:</strong> Automated alerting system reducing detection time to under 1 minute for known signatures.</li>
+                            </ul>
+                            <a href="#" class="btn-outline">View Architecture Diagram</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal delay-200 project-card">
+                    <div class="project-header">
+                        <div>
+                            <div class="project-title">Secure IoT Telemetry Architecture</div>
+                            <span class="project-subtitle">Research Project • Network Security</span>
+                        </div>
+                        <div class="tag-container">
+                            <span class="tech-tag">PKI & Certificates</span>
+                            <span class="tech-tag">TLS 1.3</span>
+                            <span class="tech-tag">MQTT</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-grid">
+                        <div>
+                            <span class="project-label">THE CHALLENGE</span>
+                            <p class="project-text">
+                                Securing the transmission of sensitive telemetry data from IoT sensors to a central server over an untrusted public network.
+                            </p>
+                        </div>
+                        <div>
+                            <span class="project-label">ENGINEERING & STRATEGY</span>
+                            <ul style="list-style: none; padding: 0; margin-bottom: 20px;">
+                                <li class="project-text">→ <strong>Encryption:</strong> Implementation of a full PKI (Public Key Infrastructure) to manage X.509 certificates for mutual authentication (mTLS).</li>
+                                <li class="project-text">→ <strong>Protocol:</strong> Hardening of the MQTT protocol using TLS 1.3 to prevent Man-in-the-Middle attacks.</li>
+                                <li class="project-text">→ <strong>Outcome:</strong> Proof of Concept demonstrating 100% encrypted data flow with authenticated devices only.</li>
+                            </ul>
+                            <a href="#" class="btn-outline">Download Technical Paper (PDF)</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
 

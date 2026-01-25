@@ -2,10 +2,81 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentin BIZET | Cybersecurity Governance</title>
+    <title>Valentin Bizet - Cybersecurity Governance & Engineering</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* --- STYLE SPÉCIFIQUE OVERVIEW --- */
+        
+        /* Hero Section : Très aéré, très "Premium" */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            color: var(--text-primary);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .cta-group { display: flex; gap: 20px; align-items: center; }
+
+        /* Section "The Approach" (3 Colonnes) */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 100px;
+            margin-bottom: 100px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .pillar h3 { font-size: 1.1rem; margin-bottom: 15px; }
+        .pillar p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
+        .pillar-icon { 
+            font-size: 1.5rem; margin-bottom: 20px; display: block; 
+            color: var(--text-accent);
+        }
+
+        /* Section "Selected Work" simplifiée */
+        .featured-project {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            text-decoration: none;
+        }
+        
+        .featured-project:hover .fp-title { color: var(--text-accent); transform: translateX(10px); }
+        
+        .fp-title { 
+            font-size: 1.5rem; font-weight: 600; color: var(--text-primary); 
+            transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fp-cat { font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; }
+
+        @media(max-width: 900px) {
+            .hero h1 { font-size: 2.5rem; }
+            .grid-3 { grid-template-columns: 1fr; gap: 40px; }
+            .featured-project { flex-direction: column; align-items: flex-start; gap: 10px; }
+        }
+    </style>
 </head>
 <body>
 
@@ -20,74 +91,82 @@
         </div>
     </nav>
 
-    <section class="section-spacer" style="padding-top: 180px;">
+    <section class="section-spacer">
         <div class="container">
-            <div class="reveal">
-                <span style="text-transform: uppercase; font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; color: var(--text-accent);">System Reliability & Compliance</span>
-                <h1>Securing Infrastructure<br>for Critical Environments.</h1>
-                <p style="margin-top: 20px; margin-bottom: 40px;">
-                    Specialized in Cybersecurity Governance (ISO 27001) and Resilient Architectures. 
-                    Helping financial and industrial sectors mitigate risk through rigorous engineering.
+            
+            <div class="hero reveal">
+                <span style="color: var(--text-accent); font-weight: 600; letter-spacing: 1px; margin-bottom: 20px; display: block;">
+                    CYBERSECURITY ENGINEERING & GRC
+                </span>
+                <h1>
+                    Bridging the gap between<br>
+                    <span style="color: var(--text-secondary);">Compliance</span> and 
+                    <span style="color: var(--text-primary);">Operational Reality</span>.
+                </h1>
+                <p>
+                    I help organizations design resilient security postures that satisfy auditors without breaking production. Focus on ISO 27001, Network Architecture, and Endpoint Security.
                 </p>
-                <a href="projects.html" class="btn-primary">View Case Studies</a>
+                <div class="cta-group">
+                    <a href="projects.html" class="btn-primary">View Case Studies</a>
+                    <a href="about.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500; font-size: 0.95rem;">
+                        More about me &rarr;
+                    </a>
+                </div>
             </div>
+
+            <div class="reveal delay-100">
+                <div class="grid-3">
+                    <div class="pillar">
+                        <span class="pillar-icon">◆</span> <h3>Governance & Risk</h3>
+                        <p>Translating business risks into technical policies. Expertise in ISO 27001 implementation, EBIOS RM methodology, and GDPR compliance.</p>
+                    </div>
+                    <div class="pillar">
+                        <span class="pillar-icon">●</span>
+                        <h3>Technical Engineering</h3>
+                        <p>Designing secure infrastructures. From Network segmentation to Endpoint Detection (EDR) with tools like Tanium.</p>
+                    </div>
+                    <div class="pillar">
+                        <span class="pillar-icon">▲</span>
+                        <h3>Operational Resilience</h3>
+                        <p>Ensuring business continuity (BCP/PCA). Security shouldn't be a blocker; it must be an enabler for business stability.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reveal delay-200" style="margin-top: 100px;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;">
+                    <h2 style="font-size: 2rem;">Selected Work.</h2>
+                    <a href="projects.html" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem;">View all projects &rarr;</a>
+                </div>
+
+                <a href="projects.html" class="featured-project">
+                    <span class="fp-title">Automotive Security Audit (TISAX)</span>
+                    <span class="fp-cat">Compliance / Industrial</span>
+                </a>
+
+                <a href="projects.html" class="featured-project">
+                    <span class="fp-title">Secure IoT Architecture</span>
+                    <span class="fp-cat">Network Engineering</span>
+                </a>
+
+                <a href="projects.html" class="featured-project">
+                    <span class="fp-title">Infrastructure Migration (270+ Nodes)</span>
+                    <span class="fp-cat">Project Management</span>
+                </a>
+            </div>
+
         </div>
     </section>
 
-    <section class="section-spacer" style="background: var(--bg-section);">
-        <div class="container">
-            <div class="reveal" style="margin-bottom: 60px;">
-                <h2>Core Competencies</h2>
-                <p>Bridging the gap between technical operations and strategic compliance.</p>
-            </div>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-                
-                <div class="card reveal delay-100">
-                    <h3 style="margin-bottom: 15px;">Governance & Risk</h3>
-                    <p style="font-size: 0.95rem;">
-                        Application of ISO 27001 standards and EBIOS RM methodology. 
-                        Translating business risks into technical controls.
-                    </p>
-                </div>
-
-                <div class="card reveal delay-200">
-                    <h3 style="margin-bottom: 15px;">Secure Architecture</h3>
-                    <p style="font-size: 0.95rem;">
-                        Designing Zero-Trust networks and mTLS encrypted pipelines for high-availability data (FinTech/OT).
-                    </p>
-                </div>
-
-                <div class="card reveal delay-300">
-                    <h3 style="margin-bottom: 15px;">Auditing & Compliance</h3>
-                    <p style="font-size: 0.95rem;">
-                        Ensuring GDPR and industry-specific regulatory alignment. 
-                        Preparing infrastructure for external audits.
-                    </p>
-                </div>
-
-            </div>
-        </div>
-    </section>
+    <footer style="margin-top: 150px; padding: 50px 0; border-top: 1px solid var(--border-subtle); text-align: center;">
+        <p style="color: var(--text-secondary); font-size: 0.9rem;">&copy; 2025 Valentin Bizet. Engineering Reliability.</p>
+    </footer>
 
     <script>
-        // SCRIPT D'ANIMATION FLUIDE (A mettre dans chaque page ou fichier JS séparé)
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
-
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
-
 </body>
 </html>
