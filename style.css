@@ -4,19 +4,23 @@
     --bg-body: #F9FAFB;       /* Gris très pâle (premium) */
     --bg-card: #FFFFFF;       /* Blanc pur */
     --bg-section: #F3F4F6;    /* Contraste section */
-    
+
     --text-primary: #0F172A;  /* Navy très sombre (remplace le noir dur) */
     --text-secondary: #64748B;/* Gris ardoise pour les détails */
     --text-accent: #0044CC;   /* "International Blue" (Sérieux) */
-    
+
     --border-subtle: rgba(0, 0, 0, 0.06);
     --shadow-soft: 0 20px 40px -10px rgba(0, 0, 0, 0.05); /* Ombre diffuse "Apple/Stripe" */
-    
+
     /* ANIMATIONS */
     --ease-premium: cubic-bezier(0.16, 1, 0.3, 1); /* Mouvement fluide et naturel */
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
     background-color: var(--bg-body);
@@ -24,52 +28,99 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
-    -webkit-font-smoothing: antialiased; /* Rendu typo net sur Mac */
+    -webkit-font-smoothing: antialiased;
 }
 
 /* --- TYPOGRAPHIE SUISSE --- */
-h1, h2, h3 { letter-spacing: -0.02em; font-weight: 700; color: var(--text-primary); }
+h1, h2, h3 {
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    color: var(--text-primary);
+}
 
-h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; }
-h2 { font-size: 2rem; margin-bottom: 10px; }
-p { color: var(--text-secondary); font-size: 1.05rem; max-width: 700px; }
+h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+p {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    max-width: 700px;
+}
 
 /* --- NAVIGATION --- */
 .navbar {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 25px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 5%;
     background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(12px); /* Effet verre dépoli */
-    position: fixed; top: 0; width: 100%; z-index: 1000;
+    backdrop-filter: blur(12px);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
     border-bottom: 1px solid var(--border-subtle);
 }
 
-.brand { font-weight: 700; font-size: 1.2rem; letter-spacing: -0.5px; }
+.brand {
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: -0.5px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
 
 .nav-links a {
-    text-decoration: none; color: var(--text-secondary);
-    margin-left: 30px; font-size: 0.9rem; font-weight: 500;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
     transition: color 0.3s ease;
+    white-space: nowrap;
 }
-.nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--text-primary);
+}
 
 /* --- LAYOUT & COMPONENTS --- */
-.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-.section-spacer { padding: 120px 0; }
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+.section-spacer {
+    padding: 120px 0;
+}
 
 .btn-primary {
     display: inline-block;
     background-color: var(--text-primary);
     color: white;
     padding: 14px 32px;
-    border-radius: 6px; /* Pas trop rond */
+    border-radius: 6px;
     text-decoration: none;
     font-weight: 600;
     transition: transform 0.4s var(--ease-premium), box-shadow 0.4s var(--ease-premium);
+    white-space: nowrap;
 }
+
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* --- CARTES PREMIUM --- */
@@ -79,8 +130,12 @@ p { color: var(--text-secondary); font-size: 1.05rem; max-width: 700px; }
     border-radius: 12px;
     padding: 40px;
     transition: all 0.5s var(--ease-premium);
-    position: relative; overflow: hidden;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 20px;
 }
+
 .card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-soft);
@@ -88,26 +143,121 @@ p { color: var(--text-secondary); font-size: 1.05rem; max-width: 700px; }
 }
 
 /* --- ANIMATIONS "SCROLL REVEAL" --- */
-/* État initial : invisible et légèrement en bas */
 .reveal {
     opacity: 0;
     transform: translateY(40px);
     transition: opacity 1s var(--ease-premium), transform 1s var(--ease-premium);
 }
-/* État final : visible et à sa place */
+
 .reveal.active {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Délais pour l'effet cascade */
 .delay-100 { transition-delay: 0.1s; }
 .delay-200 { transition-delay: 0.2s; }
 .delay-300 { transition-delay: 0.3s; }
 
+/* --- FORMULAIRES --- */
+form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1rem;
+    background-color: var(--bg-card);
+}
+
+textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+/* --- IMAGES & MÉDIAS --- */
+img,
+iframe,
+video {
+    max-width: 100%;
+    height: auto;
+}
+
 /* --- MEDIA QUERIES --- */
+/* Tablettes (768px et moins) */
 @media (max-width: 768px) {
     h1 { font-size: 2.5rem; }
-    .navbar { padding: 20px; }
-    .nav-links { display: none; } /* Pour simplifier ici, idéalement menu burger */
+    h2 { font-size: 1.7rem; }
+    p { font-size: 1rem; max-width: 100%; }
+
+    .navbar {
+        padding: 20px 5%;
+    }
+
+    .nav-links {
+        display: none; /* Masqué pour simplifier, à remplacer par un menu burger si besoin */
+    }
+
+    .container {
+        padding: 0 5%;
+    }
+
+    .section-spacer {
+        padding: 80px 0;
+    }
+
+    .card {
+        padding: 30px;
+    }
+}
+
+/* Mobiles (480px et moins) */
+@media (max-width: 480px) {
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.3rem; }
+    p { font-size: 0.95rem; }
+
+    .navbar {
+        padding: 15px 5%;
+    }
+
+    .btn-primary {
+        padding: 12px 24px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .section-spacer {
+        padding: 60px 0;
+    }
+
+    .card {
+        padding: 20px;
+    }
+}
+
+/* Très petits écrans (360px et moins) */
+@media (max-width: 360px) {
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.3rem; }
+    p { font-size: 0.9rem; }
+
+    .btn-primary {
+        padding: 10px 20px;
+    }
 }
