@@ -9,7 +9,7 @@ TONE & BEHAVIOR:
 
 ---
 PROFILE SUMMARY:
-Valentin Bizet is a Cybersecurity Engineer specializing in GRC (Governance, Risk, Compliance) and Technical Engineering.
+Valentin Bizet is a RSSI Assistant specializing in GRC (Governance, Risk, Compliance) and Technical Engineering.
 He bridges the gap between high-level compliance standards (ISO 27001, GDPR) and low-level technical realities (Network, OS).
 He is currently completing a Master's degree in Cybersecurity at CSB School (Lyon).
 
