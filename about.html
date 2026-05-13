@@ -47,6 +47,37 @@
         }
         .ref-icon { font-size: 0.9rem; }
 
+.cv-download-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.btn-cv {
+    flex: 1;
+    padding: 14px 16px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.cv-lang {
+    font-size: 0.7rem;
+    padding: 3px 7px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.18);
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+@media (max-width: 480px) {
+    .cv-download-group {
+        flex-direction: column;
+    }
+}
+
         @media(max-width: 900px) { .profile-grid { grid-template-columns: 1fr; } .profile-img { height: 350px; } }
     </style>
 </head>
@@ -85,9 +116,16 @@
                         </div>
                     </div>
 
-                    <a href="docs/CV_Valentin_Bizet.pdf" download class="btn-primary" style="margin-top: 30px; width: 100%; text-align: center;">
-                        Download Curriculum Vitae
-                    </a>
+                    <div class="cv-download-group">
+    <a href="docs/CV_Valentin_Bizet_FR.pdf" download class="btn-primary btn-cv">
+        <span class="cv-lang">FR</span>
+        Download CV - French Version
+    </a>
+    <a href="docs/CV_Valentin_Bizet_EN.pdf" download class="btn-primary btn-cv">
+        <span class="cv-lang">EN</span>
+        Download CV - English Version
+    </a>
+</div>
                 </div>
 
                 <div class="reveal delay-100">
