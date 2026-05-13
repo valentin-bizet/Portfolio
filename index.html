@@ -84,12 +84,17 @@
 
     <nav class="navbar">
         <div class="brand">VALENTIN BIZET</div>
-        <div class="nav-links">
-            <a href="index.html">Overview</a>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html" class="active">Overview</a>
             <a href="about.html">Profile</a>
             <a href="credentials.html">Qualifications</a>
-            <a href="contact.html" class="active">Contact</a>
+            <a href="contact.html">Contact</a>
         </div>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </nav>
 
     <section class="section-spacer">
@@ -139,10 +144,37 @@
     </footer>
 
     <script>
+        // Scroll reveal
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // --- MENU HAMBURGER ---
+        const hamburger = document.getElementById('hamburgerBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        function toggleMenu() {
+            const isOpen = hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            document.body.classList.toggle('menu-open', isOpen);
+            hamburger.setAttribute('aria-expanded', isOpen);
+            hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+
+        // Fermer le menu quand on clique sur un lien
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) toggleMenu();
+            });
+        });
+
+        // Fermer avec la touche Échap
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) toggleMenu();
+        });
     </script>
 
 <script>
